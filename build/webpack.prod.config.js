@@ -5,7 +5,23 @@ const baseWebpackConfig = require('./webpack.base.config.js')
 
 
 const webpackConfig = merge(baseWebpackConfig, {
+
+    // env: require('./prod.env'),
+    // index: path.resolve(__dirname, '../dist/index.html'),
+    // assetsRoot: path.resolve(__dirname, '../dist'),
+    // assetsSubDirectory: 'static',
+    // assetsPublicPath: '/',
+    // productionSourceMap: true,
+    // productionGzip: true,
+    // productionGzipExtensions: ['js', 'css'],
+    // bundleAnalyzerReport: process.env.npm_config_report,
+
     mode: 'production',
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+    productionSourceMap: true,
+    productionGzip: true,
+    productionGzipExtensions: ['js', 'css'],
     output: {
         path: config.build.assetsRoot,
         filename: 'js/[name].[chunkhash].js',

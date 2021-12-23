@@ -3,6 +3,10 @@ const merge = require('webpack-merge')
 const commonConfig = require('./webpack.base.config.js')
 const webpack = require("webpack");
 
+const target = '118.31.229.15:18081';
+// const target = 'ultradx.com';
+// const target = 'preweb.wanfeng-dev.vip';
+
 module.exports = merge(commonConfig, {
     mode: "development",
     entry: ["react-hot-loader/patch"],
@@ -30,34 +34,21 @@ module.exports = merge(commonConfig, {
         port: 8010,
         historyApiFallback: true, //  该选项的作用所有的404都连接到index.html
         proxy: {
-          '/api': {
-              // target: 'http://exbgdev.yuchains.com',
-              // target: 'http://47.96.15.141:8000',
-              // target: 'https://95319.tsex.io',
-              // target: 'https://invite.cboex.com',
-              // target: 'http://192.168.1.162:8083', // 强强插入
-              // target: 'http://192.168.1.112:8083', // 强强被插
-              // target: 'http://116.62.199.156:9089/', // 日常地址
-              target: 'http://101.37.33.73:8000',
-              // target: "http://192.168.101.14:8083/", // 郭儿
-              changeOrigin: true,
-              ws: true,
-              pathRewrite: {
-                // '^/api': '/api' // 测试
-                // '^/api': '' // 本地
-                // 线上
-              }
-          },
-          '/websocket/': {
-            target: 'ws://101.37.33.73:8000', // 后台的websocket服务地址
-            // target: 'wss://95319.tsex.io',
-            changeOrigin: false,
-            ws: true,
-            secure: false,
-            pathRewrite: {
-              '^/websocket/': ''
-            }
-          },
-      },
+            '/api': {
+                target: `http://${target}`,
+                changeOrigin: true,
+                ws: true,
+                // pathRewrite: {'^/api': ''}
+            },
+            '/websocket/': {
+                target: `ws://${target}`,
+                changeOrigin: false,
+                ws: true,
+                secure: false,
+                pathRewrite: {
+                    '^/websocket/': ''
+                }
+            },
+        },
     }
 });

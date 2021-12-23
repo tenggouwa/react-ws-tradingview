@@ -29,11 +29,35 @@ export const filterLabel = (val, list) => {
 }
 
 /**
+ * 通过当前语言合约名称
+ * @function chooseContractName
+ * @param {当前的语言} lang
+ * @param {是否需要转换} type
+ * @param {合约名称} name
+ * @param {非转换名称} klineName
+ * @returns
+ */
+
+export function chooseContractName(lang, type, name, klineName) {
+  if (!name && !klineName) return '--'
+  if (type && (lang === 'en' || lang === 'jp')) {
+      return `${name} PERP`
+  }
+  if (!name) return klineName
+  const assetName = name.split('/')[0]
+  let unit = '永續'
+  if (lang === 'zh') {
+      unit = '永续'
+  }
+  return `${assetName} ${unit}`
+}
+
+/**
  * 小数位截取，不足补0
  * @param {要截取的数字} value
  * @param {小数位数} num
  */
- export const foFixed = (value, num) => {
+export const foFixed = (value, num) => {
   let a = value.toString()
   if (a.indexOf('-') >= 0 && String(a).indexOf('e') !== -1) { // 是否有-并且有e，是为科学计数法
       a = `0${String(Number(a) + 1).substr(1)}`
