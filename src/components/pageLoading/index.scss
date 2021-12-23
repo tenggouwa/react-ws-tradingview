@@ -1,0 +1,49 @@
+
+.loadable-loading {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  .loading5{
+      position: relative;
+      display: block;
+      height: 100%;
+      width: 100%;
+      // z-index: 3000;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      transition: opacity .3s;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      zoom: 1;
+      .loading5-item{
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #3d79ec;
+        margin-right: 3px;
+        opacity: 0.5;
+        animation: load 1.8s ease-in-out infinite;
+      }
+      @keyframes load {
+        0%{
+          opacity: 0.5;
+        }
+        50%{
+          opacity: 1;
+          transform: scale(1.5);
+        }
+        100%{
+          opacity: 0.5;
+        }
+      }
+  }
+}

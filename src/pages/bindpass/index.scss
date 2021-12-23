@@ -1,0 +1,90 @@
+
+@import '@/styles/common.scss';
+
+.bindpass {
+  .safebindpass-text {
+    padding: 0 20px;
+    font-size: $font_small;
+    font-weight: $fontWeight_board;
+    .safebindpass-block {
+      display: flex;
+      align-items: center;
+      padding: 23px 0 20px;
+      img {
+        width: 20px;
+        margin: 0 5px 0 0;
+      }
+      .safebindpass-content {
+        h3 {
+          margin: 0;
+        }
+        >span {
+          display: block;
+        }
+        .safebindpass-introduce {
+          color: $color_community_personal;
+        }
+      }
+    }
+    .safebindpass-form {
+      .ant-form-item {
+        font-weight: $fontWeight_board;
+        .ant-form-item-label {
+          padding: 0;
+          >label {
+            font-size: $font_small;
+          }
+          .ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+            content: "";
+          }
+        }
+      }
+      input {
+        height: 45px;
+      }
+      .ant-input-affix-wrapper {
+        padding: 0 11px;
+      }
+      .safebindpass-sendCode {
+        .ant-form-item-control-input-content {
+          position: relative;
+          button {
+            position: absolute;
+            top: 40px;
+            font-size: $font_small;
+            right: 0;
+            color: $color_normal;
+            font-weight: $fontWeight_board;
+            .code-color {
+              color: #181E24;
+              .code-red {
+                color: #D14B4F;
+              }
+            }
+          }
+          .ant-btn-text:hover {
+            background: none;
+          }
+        }
+        .safebindpass-register {
+          font-size: $font_small;
+          // color: $color_community_personal;
+        }
+        .ant-form-item {
+          margin: 0;
+        }
+      }
+      .ant-btn-primary {
+        background: $color_normal;
+        border: none;
+        width: 100%;
+        color: $color_black;
+        height: 45px;
+        margin: 50px 0 0;
+      }
+      .ant-btn-primary:disabled {
+        background: $disb-background;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+export default {
+    tit0: 'Next Generation of Crypto Derivatives Trading Platform',
+    tit1: 'Introduction',
+    tit2: 'Terms of Services',
+    tit3: 'Contact Us',
+    tit4: 'Community',
+    tip1: 'About CBOEX',
+    tip2: 'Risk Control Rules',
+    tip3: 'Terms of Service',
+    tip4: 'Disclaimer',
+    tip5: 'Privacy Policy',
+    tip6: 'Help Center',
+    tip7: 'Email: support@cboex.com',
+    tip8: 'Feedback',
+}

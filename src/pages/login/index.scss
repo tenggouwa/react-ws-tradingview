@@ -1,0 +1,192 @@
+@import '../../styles/common.scss';
+.login {
+  .login-main {
+    margin: 0 auto;
+    height: 100vh;
+    .login-form {
+      padding: 20px 15px 20px;
+      background: $color_white;
+      height: 100%;
+      .icon-fanhuijiantou {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+        .right-title {
+          flex: 1;
+
+          h5 {
+            color: $color_content;
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 0;
+          }
+          p {
+            color: $color_tab;
+            margin-bottom: 0;
+            font-weight: $fontWeight_board;
+            margin-bottom: 15px;
+            font-size: 12px;
+          }
+        }
+
+        
+        .login-tab {
+          li {
+            display: inline-block;
+            cursor: pointer;
+            margin-right: 20px;
+            position: relative;
+            line-height: 34px;
+            color: $color_tab;
+            transition: $transColor_linear;
+            font-weight: $fontWeight_board;
+          }
+          .active {
+            color: $color_title;
+          }
+          .active:after {
+            position: absolute;
+            content: '';
+            width: 18px;
+            height: 4px;
+            border-radius: $borderRadius_small;
+            background: $color_normal;
+            bottom: 0;
+            left: 50%;
+            margin-left: -9px;
+          }
+        }
+        .form {
+          // min-height: calc(100vh - 170px);
+          flex: 2;
+          position: relative;
+          input {
+            height: 48px;
+          }
+          .ant-select-selector {
+            height: 48px;
+            .ant-select-selection-placeholder, .ant-select-selection-item {
+              line-height: 48px !important;
+            }
+          }
+          .ant-btn-primary {
+            background: $color_normal;
+            border-color: $color_normal;
+            height: 48px;
+            font-size: $fontSize_large;
+            color: $color_title;
+            transition: $transAll_linear;
+          }
+          .ant-btn-primary[disabled] {
+            color: rgba(0, 0, 0, 0.25);
+            background: #f5f5f5;
+            border-color: #d9d9d9;
+            text-shadow: none;
+            box-shadow: none;
+          }
+          
+          // .disabled {
+          //   background: $color_disable;
+          //   color: $color_white;
+          //   border-color: $color_disable;
+          // }
+          .ant-form-item:last-child {
+            margin-bottom: 5px;
+          }
+          .ant-form-item {
+            margin-bottom: 15px;
+            .ant-form-item-label {
+              padding: 0;
+
+              .ant-form-item-required {
+                font-size: 12px;
+                font-weight: 500;
+                color: #8E8E8E;
+              }
+
+              .ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+                content: "";
+              }
+            }
+            .ant-form-item-control {
+              .ant-form-item-control-input-content {
+                .ant-input-affix-wrapper {
+                  padding: 0 11px;
+                }
+              }
+              .ant-form-item-explain-error {
+                font-size: 12px;
+                font-weight: 500;
+                color: #F6465D;
+              }
+            }
+          }
+          .submit-btn {
+            // position: absolute;
+            // bottom: 0;
+            width: 100%;
+          }
+        }
+        .formTips {
+          flex: 1;
+          display: flex;
+          p {
+            flex: 1;
+            color: $color_normal;
+            margin-bottom: 0;
+            cursor: pointer;
+            span {
+              color: $color_tab;
+              cursor: text;
+            }
+          }
+          p:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+    .appDom {
+      margin-top: 20px;
+      display: flex;
+      .space {
+        flex: 1;
+        height: 90px;
+      }
+      .content {
+        flex: 1;
+        background: $color_back_middle;
+        padding: 15px 20px;
+        border-radius: $borderRadius_large;
+        display: flex;
+        div:first-child {
+          width: 70px;
+          height: 70px;
+          margin-right: 20px;
+          background: $color_white;
+          border-radius: $borderRadius_middle;
+          canvas {
+            display: block;
+            margin: 0 auto;
+            margin-top: 3px;
+          }
+        }
+        div:last-child {
+          flex: 1;
+          font-size: $fontSize_small;
+          color: $color_white;
+          p {
+            margin-bottom: 0;
+            line-height: 34px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+.commons-table {
+  width: 100%;
+  background-color: #fff;
+
+  .tableOnes {
+    ul {
+      li {
+        padding: 0 10px;
+        line-height: 65px;
+        border: 1px solid #F7F6F6;
+        font-size: 14px;
+        color: #4b4f59;
+        letter-spacing: 0;
+        text-align: left;
+        span{
+            display: inline-block;
+            color: #181E24;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .daily-red {
+          font-size: 14px;
+          color: #DA364D;
+          letter-spacing: 0;
+        }
+      
+        .daily-green {
+          font-size: 14px;
+          color: #2EBD85;
+          letter-spacing: 0;
+        }
+      }
+      
+
+      li:first-child{
+        margin: 0;
+        height: 40px;
+        line-height: 25px;
+        padding: 0 20px;
+        span{
+            font-size: 14px;
+            color: #A7B1BB;
+            opacity: 0.73;
+            letter-spacing: 0;
+            text-align: center;
+            margin-top: 8px;
+            text-align: left;
+        }
+    }
+    }
+  }
+
+}

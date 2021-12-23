@@ -1,0 +1,50 @@
+@import '../../styles/common.scss';
+.assetsOrderList {
+  .assetsOrderList-ul {
+    padding: 15px;
+    background: $color_white_bg;
+    li {
+      display: flex;
+      justify-content: space-between;
+      font-size: $fontSize_large;
+      margin-bottom: 15px;
+      p {
+        margin: 0;
+      }
+      .label {
+        color: $color_assetsTable_tit;
+      }
+      .value {
+        color: $color_assetsTable_content;
+      }
+    }
+    li:last-child {
+      margin-bottom: 0;
+    }
+    .actionDown {
+      .btnText {
+        text-align: right;
+        color: $color_normal;
+        font-size: $fontSize_middle;
+        i {
+          margin-left: 5px;
+          transform: rotate(180deg);
+          display: inline-block;
+          transition: $transAll_linear;
+        }
+        .down {
+          transform: rotate(0deg);
+        }
+      }
+    }
+  }
+  .tableNoData {
+    background: $color_white_bg;
+    padding: 72px 0;
+    img {
+      display: block;
+      width: 88px;
+      margin: 0 auto;
+    }
+  }
+}

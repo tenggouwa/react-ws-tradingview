@@ -1,0 +1,59 @@
+@import '@/styles/common.scss';
+.homeTable {
+  width: 100%;
+  background-color: #fff;
+
+  .homeTable-container {
+    padding: 0 10px;
+  }
+
+  &-tab {
+    display: flex;
+    font-weight: 500;
+    border-bottom: 1px solid #F7F6F6;
+    height: 48px;
+    line-height: 48px;
+    box-shadow: 0px -5px 15px 0px rgba(188, 188, 188, 0.5);
+    background-color: #fff;
+
+    .tab-submenu-comm-market:first-child {
+      margin-left: 20px;
+    }
+    
+    .tab-submenu-comm-market {
+      display: inline-block;
+      font-size: 14px;
+      color: #181E24;
+      letter-spacing: 0;
+      text-align: center;
+      margin-left: 25px;
+      padding-bottom: 8px;
+      cursor: pointer;
+      position: relative;
+    }
+
+  .tab-submenu-comm-market:after {
+      position: absolute;
+      content: '';
+      width: 20px;
+      height: 2px;
+      bottom: 0;
+      border-radius: 2px;
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-10px);
+      transition: background 0.2s linear;
+    }
+
+  .active:after {
+      background: $color_normal;
+    }
+  }
+
+  &-Content {
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px -5px rgba(188, 188, 188, 0.5);
+  }
+ 
+}

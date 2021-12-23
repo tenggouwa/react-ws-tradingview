@@ -1,0 +1,39 @@
+@import '../../styles/common.scss';
+
+.Property {
+  // height: 100vh;
+
+  .Property-main {
+    .Property-menu {
+      width: 100%;
+      // padding: 0 10px;
+      background: #191e22;
+      line-height: 50px;
+      display: flex;
+      position: relative;
+
+      a {
+        color: $color_assetsTit_color;
+        display: inline-block;
+        margin: 0 15px;
+        transition: $transColor_linear;
+      }
+
+      .menuActive {
+        color: $color_white;
+        position: relative;
+      }
+
+      .menuActive::before {
+        content: '';
+        z-index: 1;
+        height: 2px;
+        width: 100%;
+        color: $color_white;
+        background: $color_normal;
+        bottom: 10px;
+        position: absolute;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+@import '../../styles/common.scss';
+
+.market {
+  .market-main {
+    width: 1180px;
+    padding: 30px 10px;
+    margin: 0 auto;
+    padding-top: 30px;
+    .marketCard {
+      display: flex;
+      margin-bottom: 20px;
+      .marketCard-item {
+        flex: 1;
+        margin-right: 20px;
+        background: $color_white;
+        box-shadow: 0px 2px 6px 0px rgba(233, 231, 231, 0.5);
+        border-radius: $borderRadius_middle;
+        padding: 10px;
+        position: relative;
+        .line {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+        }
+        img {
+          width: 18px;
+          margin-right: 8px;
+        }
+      }
+      .marketCard-item:last-child {
+        margin-right: 0;
+      }
+    }
+    .marketTable {
+      background: $color_white;
+      box-shadow: 0px 2px 6px 0px rgba(233, 231, 231, 0.5);
+      border-radius: $borderRadius_middle;
+      overflow: hidden;
+      .marketTab {
+        display: flex;
+        border-bottom: 1px solid $color_input_line;
+        padding: 5px 16px 0 16px;
+        margin-bottom: 0;
+        li {
+          margin-right: 30px;
+          cursor: pointer;
+          user-select: none;
+          font-size: $fontSize_xLarge;
+          color: $color_tab;
+          transition: $transColor_linear;
+          position: relative;
+          line-height: 36px;
+        }
+        .active {
+          color: $color_title;
+        }
+        li:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          z-index: 1;
+          left: 50%;
+          width: 18px;
+          height: 2px;
+          transform: translateX(-9px);
+          border-radius: $borderRadius_small;
+          background: transparent;
+          transition: $transBack_linear;
+        }
+        .active:after {
+          background: $color_normal;
+        }
+      }
+    }
+  }
+}

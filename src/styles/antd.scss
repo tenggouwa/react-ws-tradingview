@@ -1,0 +1,20 @@
+@import './common.scss';
+
+.ant-input,
+.ant-select-selector {
+  border-color: $color_input_line !important;
+  box-shadow: none !important;
+}
+.ant-input:focus, .ant-input:hover,
+.ant-select-selector:focus, .ant-select-selector:hover {
+  border-color: $color_tab !important;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.ant-btn-text:active, .ant-btn-text:hover, .ant-btn-text:focus {
+  background: transparent;
+}
+.ant-empty {
+  background: #fff;
+}

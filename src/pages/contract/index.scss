@@ -1,0 +1,35 @@
+@import '../../styles/common.scss';
+.contract {
+  min-width: 100vh;
+  height: calc(100vh - 64px);
+  display: flex;
+  background: $color_trade_bg_main;
+  color: $color_white;
+  .contract-left {
+    flex: 8;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    margin: 8px 8px 0 8px;
+    .contract-left-container {
+      display: flex;
+      flex: 1;
+      margin-top: 8px;
+      .kLine {
+        flex: 8;
+        margin-right: 8px;
+      }
+      .deepLine {
+        flex: 3;
+      }
+    }
+    .contract-left-table {
+      height: 240px;
+      margin-top: 8px;
+    }
+  }
+  .contract-right {
+    flex: 2;
+    margin-top: 8px;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../styles/common.scss';
+
+.Carousel {
+  .commonBanner-item {
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: $color_trade_bg;
+  }
+  .ant-carousel {
+    .slick-dots {
+      li {
+        width: 6px;
+        height: 6px;
+        border-radius: $borderRadius_xxLarge;
+        overflow: hidden;
+        button {
+          height: 100%;
+          background: $color_tab;
+          opacity: 1;
+        }
+      }
+      .slick-active {
+        width: 6px;
+        height: 6px;
+        button {
+          height: 100%;
+          background: $color_normal;
+        }
+      }
+    }
+  }
+}

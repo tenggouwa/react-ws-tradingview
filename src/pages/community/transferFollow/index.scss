@@ -1,0 +1,133 @@
+
+@import '@/styles/common.scss';
+
+.transferFollow {
+  width: 100%;
+  background-color: #fff;
+  height: calc(100vh - 64px);
+  &-container {
+    padding: 15px;
+    height: 100%;
+    // min-height: calc(100vh - 64px);
+
+    .form {
+      // position: relative;
+      // height: calc(100vh - 320px);
+      input {
+        height: 36px;
+      }
+      .label-div {
+        >span:first-child {
+          font-size: 12px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #7B818A;
+        }
+
+        >span:last-child {
+          font-size: 12px;
+          font-family: D-DINExp, D;
+          font-weight: normal;
+          color: $color_normal_line;
+        }
+      }
+      .ant-form-item {
+        margin-bottom: 15px;
+
+        &.followAmount {
+          .ant-form-item-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #7B818A;
+          }
+          .lable-amount {
+            font-size: 16px;
+            font-family: D-DINExp-Bold, D-DINExp;
+            font-weight: bold;
+            color: #F3C054;
+          }
+        }
+        &.transferLable {
+          font-size: 14px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #333333;
+        }
+        &:nth-child(3) {
+          margin-bottom: 0;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+        .ant-form-item-label {
+          padding: 0;
+          >label {
+            font-size: $font_small;
+          }
+          .ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+            content: "";
+          }
+        }
+        .ant-form-item-control {
+          .lable-msg {
+            padding-bottom: 10px;
+            font-size: 12px;
+            color: #7B818A;
+            font-weight: 400;
+          }
+          .ant-form-item-control-input {
+            line-height: 36px;
+            .ant-form-item-control-input-content {
+              // height: 36px !important;
+
+              .ant-select  {
+                .ant-select-selector {
+                  height: 36px;
+                  .ant-select-selection-placeholder {
+                    line-height: 36px;
+                  }
+                }
+              }
+              
+            }
+          }
+          .ant-form-item-explain {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .submit-btn {
+        width: 100%;
+        // position: absolute;
+        // bottom: 0;
+        .ant-form-item-control-input-content {
+          display: flex;
+          flex-direction: column;
+
+          .btn-title {
+            font-size: 11px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: $color_normal_line;
+            text-align: center;
+          }
+          .ant-btn {
+            height: 32px;
+            font-size: 14px;
+            font-weight: 600;
+            &:first-child {
+              border-color: $color_normal_line;
+              color: $color_normal_line;
+            }
+            &:last-child {
+              background-color: $color_normal_line;
+              color: #333;
+              border-color: $color_normal_line;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+@import '../../styles/common.scss';
+
+.orderList {
+  padding: 14px;
+  height: 100%;
+  background: $color_trade_bg_card;
+  .orderList-tab {
+    display: flex;
+    border-bottom: $line_trade;
+    p {
+      margin-right: 40px;
+      margin-bottom: 0;
+      cursor: pointer;
+      position: relative;
+      font-size: $fontSize_middle;
+      color: $color_tab;
+      line-height: 44px;
+      transition: $transColor_linear;
+    }
+    p:after {
+      content: '';
+      z-index: 1;
+      width: 18px;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: transparent;
+      transform: translateX(-9px);
+      border-radius: $borderRadius_small;
+      transition: $transBack_linear;
+      position: absolute;
+    }
+    .active {
+      color: #fff;
+    }
+    .active:after {
+      background: $color_normal;
+    }
+  }
+  .list-content {
+    .list-type {
+      padding: 10px 0;
+      img {
+        width: 20px;
+        margin-right: 30px;
+        padding: 2px 1px 1px 2px;
+        text-align: center;
+        border-radius: $borderRadius_small;
+        transition: $transBack_linear;
+        cursor: pointer;
+        user-select: none;
+      }
+      img:last-child {
+        margin-right: 0;
+      }
+      .active {
+        background: $color_black;
+      }
+    }
+    .list-title {
+      display: flex;
+      p {
+        text-align: center;
+        font-size: $fontSize_middle;
+        font-weight: $fontWeight_board;
+        color: $color_tab;
+        flex: 1;
+        margin-bottom: 0;
+      }
+      p:first-child {
+        text-align: left;
+      }
+      p:last-child {
+        text-align: right;
+      }
+    }
+    .list-main {
+      display: flex;
+      flex-flow: column;
+      .list-center {
+        height: 48px;
+        background: $color_trade_bg;
+      }
+      .list-item {
+        flex: 1;
+        margin-bottom: 0;
+        font-size: $fontSize_small;
+        color: $color_white;
+        line-height: 30px;
+        li {
+          display: flex;
+          span {
+            display: inline-block;
+            flex: 1;
+            text-align: center;
+          }
+          span:first-child {
+            text-align: left;
+          }
+          span:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

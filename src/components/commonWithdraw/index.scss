@@ -1,0 +1,391 @@
+@import '../../styles/common.scss';
+
+.mentionMoney {
+    transition: all .3s ease 0s;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    .MentionMoney {
+        transition: all .3s ease 0s;
+        z-index: 2;
+        background: $color_white;
+        border-radius: 4px;
+        // padding: 20px 15px 10px 15px;
+        margin: 8px;
+
+        &.contactTransferPop {
+            background-color: #1E2126;
+        }
+
+        .mentionMoney-title {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 0px 15px;
+          border-bottom: 1px solid $color_input_line;
+          line-height: 40px;
+          height: 40px;
+
+            .withdraw-title {
+              font-size: $fontSize_large;
+              color: $color_assetsTit_bg;
+              font-weight: 500;
+              display: inline-block;
+            }
+
+            .icon-cancel01 {
+              display: inline-block;
+              font-size: $fontSize_xxxxLarge;
+            }
+        }
+
+        .body-box {
+          padding: 10px 15px 0 15px;
+        }
+
+        .mentionMoney-flow {
+            width: 100%;
+            margin-bottom: 10px;
+            position: relative;
+
+            // input和text组合
+            .input-addon {
+              display: flex;
+              line-height: 40px;
+              height: 40px;
+              border: 1px solid #d9d9d9;
+              flex-direction: row;
+              justify-content: space-between;
+
+              .ant-input-number-input-wrap {
+                line-height: 40px;
+                .ant-input-number-input {
+                  line-height: 40px;
+                  height: 40px;
+                }
+              }
+
+              .flow-inp-num {
+                display: inline-block;
+                flex: 1;
+                background: transparent;
+                width: 65%;
+
+                // .ant-input-number-focused {
+                //   box-shadow: none;
+                //   border: none;
+                // }
+
+              }
+
+              .flow-inp-code {
+                display: inline-block;
+                flex: 1;
+                background: transparent;
+                width: 100%;
+              }
+
+              .addon, .addonAll, .forget-screct {
+                width: 35%;
+                text-align: right;
+              }
+            }
+
+            // 链名称
+            .select-address {
+              display: flex;
+          
+              p {
+                display: inline-block;
+                // padding: 3px 5px;
+                line-height: 30px;
+                border: 1px solid $color_input_line;
+                text-align: center;
+                margin-bottom: 0;
+                flex: 1;
+          
+                i {
+                  display: inline-block;
+                  margin-right: 5px;
+                  color: $color_normal;
+                  border: 1px solid transparent;
+                }
+          
+                i.icon-no-select {
+                  color: $color_input_line;
+                }
+          
+                span {
+                  display: inline-block;
+                  color: $color_assetsTit_bg;
+                  font-size: $fontSize_middle;
+                }
+              }
+          
+              p:nth-child(2) {
+                margin: 0 10px;
+              }
+            }
+
+            &.flex-direction-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 15px;
+            }
+            .ant-input:focus {
+                box-shadow: none;
+            }
+            .code-box {
+                span {
+                    cursor: pointer;
+
+                    &.active {
+                        color: $color_normal;
+                    }
+                }
+
+                .lable-line {
+                    margin: 0 10px;
+                    font-size: $fontSize_middle;
+                    color: $color_tab;
+                }
+            }
+
+            .label {
+                font-size: $fontSize_middle;
+                color: #333;
+                // font-weight: 600;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+
+            .flow-inp-select {
+                height: 40px;
+
+                .ant-select-selection {
+                    height: 40px;
+                    &:hover {
+                        border: 1px solid $color_normal_line !important;
+                    }
+                    .ant-select-selection__rendered {
+                        line-height: 40px;
+                    }
+                }
+                .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
+                    box-shadow: none;
+               }
+            }
+
+            .flow-inp {
+                height: 40px;
+
+                &:focus,
+                &:hover {
+                    border: 1px solid $color_normal_line;
+                }
+            }
+
+            .flow-inp-num,
+            .flow-inp-code {
+                height: 40px;
+                position: relative;
+
+                &:focus,
+                &:hover {
+                    border: 1px solid $color_normal_line;
+                }
+            }
+
+            .forget-screct {
+                font-size: $fontSize_middle;
+                font-weight: 500;
+                padding: 0 5px;
+
+                .addonAll {
+                    color: $color_normal;
+                    cursor: pointer;
+                }
+            }
+
+            .code_sms {
+                font-size: $fontSize_middle;
+                font-weight: 500;
+                padding: 0 5px;
+
+                .addonAll {
+                    color: $color_normal;
+                    cursor: pointer;
+                }
+            }
+
+            .addon {
+                font-size: $fontSize_middle;
+                font-weight: 500;
+                padding: 0 5px;
+                color: #D8D8D8;
+
+                .addonCoins {
+                    color: #D8D8D8;
+                }
+
+                .addonAll {
+                    color: $color_normal;
+                    cursor: pointer;
+                }
+            }
+
+            .errorTxt {
+                font-size: $fontSize_middle;
+                font-weight: 400;
+                color: $color_red;
+            }
+
+            .convertible-warp {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 10px;
+                font-size: 12px;
+                color: $color_tab;
+                font-weight: 500;
+
+                span {
+                  font-size: 12px;
+                }
+
+                .flex-direction-column {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    span {
+                        &:nth-of-type(1) {
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+
+            .flow-radio {
+                .ant-radio-group {
+                    width: 100%;
+
+                    .radio-lable {
+                        width: 30%;
+                        height: 30px;
+                        line-height: 30px;
+                        text-align: center;
+                        border: 1px solid $color_input_line;
+                        border-radius: 3px;
+                        color: $color_assetsTit_bg;
+                        font-size: $fontSize_middle;
+                        letter-spacing: 0;
+                        padding: 0 3%;
+                        margin: 0 auto;
+
+                        .ant-radio-checked::after {
+                            content: "";
+                            border: 1px solid $color_normal;
+                        }
+
+                        .ant-radio-checked .ant-radio-inner {
+                            border-color: $color_normal;
+
+                            &::after {
+                                content: "";
+                                background-color: $color_normal;
+                            }
+                        }
+
+                        margin-right: 0;
+
+                        &:nth-of-type(2) {
+                            margin-left: 5%;
+                        }
+
+                        &:nth-of-type(3) {
+                            margin-left: 5%;
+                        }
+                    }
+                }
+            }
+
+            .key-warp {
+                width: 100%;
+                // margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .flow-key {
+                    font-size: $fontSize_middle;
+                    color: $color_assetsTit_bg;
+                    letter-spacing: 0;
+                    font-weight: 500;
+                }
+
+                .copy-key {
+                    font-size: $fontSize_middle;
+                    color: $color_normal;
+                    font-weight: 500;
+                    margin: 13px 0 20px 0;
+                }
+
+                .code-img {
+                    width: 115px;
+                    height: 115px;
+                    background-color: #D8D8D8;
+                }
+            }
+
+            .flow-p {
+                font-size: 12px;
+                font-weight: 500;
+                color: $color_assetsTit_bg;
+                padding: 0 15px 10px 15px;
+
+                p {
+                    margin-bottom: 10px;
+                }
+            }
+
+            .flow-btn {
+                width: 100%;
+                // margin: 20px 0;
+                border: none;
+                // height: 50px;
+                // line-height: 50px;
+                border-radius: 3px;
+                color: $color_white;
+                font-size: $fontSize_middle;
+                font-weight: 500;
+            }
+
+            .disable {
+                // cursor: none;
+                background-color: $color_tab;
+            }
+
+            .primaryBtn {
+                cursor: pointer;
+                background-color: $color_normal;
+            }
+        }
+
+        .icon-chahao1 {
+            color: #AAAFB9;
+            font-size: $fontSize_large;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            line-height: 16px;
+            cursor: pointer;
+        }
+    }
+}

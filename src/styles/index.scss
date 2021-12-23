@@ -1,0 +1,100 @@
+@import '~antd/dist/antd.css';
+@import './antd.scss';
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+div,
+dl,
+dt,
+dd,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+img,
+ol,
+ul,
+li,
+table,
+th,
+td,
+p,
+span,
+a {
+    border: 0;
+}
+
+img,
+input {
+    border: none;
+}
+
+html body {
+    font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #F5F5F5;
+    // background: #fafafa;
+}
+.routerMain, #root{
+    width: 100%;
+    height: 100%;
+}
+.message {
+    position: absolute;
+    right: 20px;
+    top:85px;
+    width:230px;
+    background: red
+}
+ul,
+ol {
+    list-style-type: none;
+}
+a,
+a:link,
+a:visited,
+a:active,
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+a, input, button {
+    outline: none;
+}
+a, button {
+    cursor: pointer;
+}
+input::placeholder {
+    color: #c3c6ce;
+}
+
+input::-webkit-credentials-auto-fill-button {
+    display: none !important
+}
+html,
+body {
+    height: 100%;
+}
+i {
+    font-style: normal;
+}
+
+#app {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    min-height: 100%;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}

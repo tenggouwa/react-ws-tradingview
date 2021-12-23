@@ -1,0 +1,36 @@
+@import '../../styles/common.scss';
+.tradeCoin {
+  width: 100%;
+  height: 42px;
+  line-height: 42px;
+  background: $color_trade_bg_card;
+  padding: 0 32px;
+  overflow-x: auto;
+  margin-bottom: 0;
+  display: flex;
+  color: #fff;
+  li {
+    margin-right: 39px;
+    cursor: pointer;
+    user-select: none;
+    i {
+      color: $color_normal;
+      margin-right: 10px;
+    }
+    .label {
+      font-size: $fontSize_middle;
+      font-weight: $fontWeight_board;
+      color: $color_white;
+      margin-right: 4px;
+    }
+    .value {
+      font-size: $fontSize_small;
+    }
+    .red {
+      color: $color_red;
+    }
+    .green {
+      color: $color_green;
+    }
+  }
+}

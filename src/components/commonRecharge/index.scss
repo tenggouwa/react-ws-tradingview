@@ -1,0 +1,89 @@
+@import '../../styles/common.scss';
+
+.recharge {
+  p {
+    margin-bottom: 0;
+  }
+
+  p.modal-title {
+    padding: 10px 0;
+  }
+
+  .select-address {
+    display: flex;
+
+    p {
+      display: inline-block;
+      // padding: 3px 5px;
+      line-height: 30px;
+      border: 1px solid $color_input_line;
+      text-align: center;
+      flex: 1;
+
+      i {
+        display: inline-block;
+        margin-right: 5px;
+        color: #F6CC2E;
+        border: 1px solid transparent;
+      }
+
+      i.icon-no-select {
+        color: $color_input_line;
+      }
+
+      span {
+        display: inline-block;
+        color: $color_assetsTit_bg;
+        font-size: $fontSize_middle;
+      }
+    }
+
+    p:nth-child(2) {
+      margin: 0 10px;
+    }
+  }
+
+  .secret-key {
+    margin-top: 15px;
+    color: $color_assetsTit_bg;
+    text-align: center;
+    font-size: $fontSize_middle;
+  }
+
+  .address-text {
+    p {
+      font-size: $fontSize_small;
+    }
+  }
+
+  .QRCode {
+    width: 100px;
+    height: 100px;
+    // background: #D8D8D8;
+    border-radius: 4px;
+    text-align: center;
+    margin: 0 auto 15px auto;
+  }
+
+  p.copy {
+    color: #F6CC2E;
+    font-size: $fontSize_middle;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .ant-modal-content {
+    .ant-modal-close-x {
+      height: 43px;
+      line-height: 43px;
+    }
+
+    .ant-modal-header {
+      padding: 10px 15px;
+    }
+    
+    .ant-modal-body {
+      padding: 0px 15px 20px;
+    }
+  }
+}

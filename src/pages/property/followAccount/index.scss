@@ -1,0 +1,21 @@
+@import '../../../styles/common.scss';
+
+.followAccount {
+  .dataHeader-btns {
+    div {
+      padding: 1px 0;
+      border: 1px solid $color_normal;
+      background: $color_white;
+      color: $color_normal;
+      font-size: $fontSize_middle;
+      text-align: center;
+      display: inline-block;
+      border-radius: 4px;
+      width: 60px;
+    }
+
+    div:nth-child(2) {
+      margin: 0 10px;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../styles/common.scss';
+.kline {
+  display: flow-root;
+  margin-right: 4px;
+  width: 100%;
+  height: 100%;
+  background: $color_trade_bg_card;
+  .kline_box {
+    background: transparent;
+    position: initial;
+    height: 100%;
+  }
+}
+
+.pane-legend {
+  display: none;
+}
