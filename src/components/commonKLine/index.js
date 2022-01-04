@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 import { chooseContractName } from '@/assets/js/common'
 import VConsole from 'vconsole';
 
-import { Datafeeds, extraConfig } from './datafees'
+import { Datafeeds, extraConfig, ThemeDark, ThemeWhite } from './datafees'
 import { widget } from '../../../static/TradingView/charting_library';
 import './index.scss'
 
@@ -26,7 +26,9 @@ new VConsole();
 export default class index extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      theme: ThemeWhite
+    }
     this.cacheData = {}
     this.resolution = '15'
     this.lastHistoryKlineTime = '' // 缓存当前最后一个历史点
@@ -90,6 +92,7 @@ export default class index extends React.Component {
   }
   
 	initTradingview (props) {
+    const { theme } = this.state;
     const { lang } = props || this.props
     let tvLang = lang
     switch (lang) {
@@ -114,9 +117,8 @@ export default class index extends React.Component {
       locale: tvLang,
       fullscreen: false,
       autosize: true,
-      theme: 'Dark',
-      // toolbar_bg: '#12192E',
-      toolbar_bg: '#131722',
+      theme: theme.theme,
+      toolbar_bg: theme.toolbar_bg,
       disabled_features: [
         'Legend_widget',
         'main_series_scale_menu',
@@ -159,19 +161,19 @@ export default class index extends React.Component {
         // ======整体背景以及刻度线======
         'volumePaneSize': 'medium', // large, medium, small, tiny
         'symbolWatermarkProperties.color': 'rgba(0,0,0,0)', // 水印的主要配置
-        'paneProperties.background': '#131722',
-        'paneProperties.vertGridProperties.color': '#363c4e',
-        'paneProperties.horzGridProperties.color': '#363c4e',
+        'paneProperties.background': theme.background,
+        'paneProperties.vertGridProperties.color': theme.vertGridProperties,
+        // 'paneProperties.horzGridProperties.color': theme.horzGridProperties,
         'paneProperties.backgroundType': 'solid', // or 'gradient'
-        'paneProperties.horzGridProperties.color': "#252a38", // 纵轴刻度线颜色
+        'paneProperties.horzGridProperties.color': theme.horzGridProperties, // 纵轴刻度线颜色
         'paneProperties.horzGridProperties.style': 0,
-        'paneProperties.crossHairProperties.color': "#b2b5be", // 十字线颜色
+        'paneProperties.crossHairProperties.color': theme.crossHairProperties, // 十字线颜色
         'paneProperties.crossHairProperties.width': 1,
         'paneProperties.crossHairProperties.style': 2,
 
         'scalesProperties.fontSize': 11,
-        'scalesProperties.lineColor' : "#31384a", // x轴 y轴颜色
-        'scalesProperties.textColor': '#C5CDE1', // x轴 y轴文字颜色
+        'scalesProperties.lineColor' : theme.lineColor, // x轴 y轴颜色
+        'scalesProperties.textColor': theme.textColor, // x轴 y轴文字颜色
 
         'mainSeriesProperties.style': 1,
         'mainSeriesProperties.showCountdown': true, // 是否展示倒计时
@@ -180,17 +182,17 @@ export default class index extends React.Component {
         'mainSeriesProperties.priceLineWidth': 1, // 当前价格横线宽度
         'mainSeriesProperties.priceLineColor': '', // 当前价格横线颜色
 
-        'mainSeriesProperties.candleStyle.upColor': "#63C9A2", // 蜡烛填充色
-        'mainSeriesProperties.candleStyle.downColor': "#FC4E56", // 蜡烛填充色
-        'mainSeriesProperties.candleStyle.borderUpColor': "#63C9A2", // 蜡烛边框色
-        'mainSeriesProperties.candleStyle.borderDownColor': "#FC4E56", // 蜡烛边框色
-        'mainSeriesProperties.candleStyle.wickUpColor': "#63C9A2", // 蜡烛竖线颜色
-        'mainSeriesProperties.candleStyle.wickDownColor': "#FC4E56", // 蜡烛竖线颜色
+        'mainSeriesProperties.candleStyle.upColor': theme.upColor, // 蜡烛填充色
+        'mainSeriesProperties.candleStyle.downColor': theme.downColor, // 蜡烛填充色
+        'mainSeriesProperties.candleStyle.borderUpColor': theme.borderUpColor, // 蜡烛边框色
+        'mainSeriesProperties.candleStyle.borderDownColor': theme.borderDownColor, // 蜡烛边框色
+        'mainSeriesProperties.candleStyle.wickUpColor': theme.wickUpColor, // 蜡烛竖线颜色
+        'mainSeriesProperties.candleStyle.wickDownColor': theme.wickDownColor, // 蜡烛竖线颜色
 
       },
       studies_overrides: {
-        'volume.volume.color.0': '#FC4E56',
-        'volume.volume.color.1': '#63C9A2',
+        'volume.volume.color.0': theme.volume0,
+        'volume.volume.color.1': theme.volume1,
       },
 		};
 
@@ -209,6 +211,8 @@ export default class index extends React.Component {
           if (button.resolution === resolution) {
             btn.classList.add('active')
             btn.style.color = '#1976d2'
+          } else {
+            btn.style.color = theme.textColor
           }
           btn.addEventListener('click', (e) => {
             if (btn.className.indexOf('active') > -1) return false
@@ -218,7 +222,7 @@ export default class index extends React.Component {
                 const childNode = index.childNodes[0].childNodes[0]
                 if (childNode.className.indexOf('active') > -1) {
                   childNode.className = childNode.className.replace('active', '')
-                  childNode.style.color = '#b2b5be'
+                  childNode.style.color = theme.textColor
                 }
               }
             }

@@ -53,3 +53,40 @@ export function extraConfig(self) {
       },
   }
 }
+
+export const ThemeDark = {
+  theme: 'Dark',
+  toolbar_bg: '#131722',
+  background: '#131722',
+  vertGridProperties: '#363c4e',
+  horzGridProperties: '#252a38',
+  crossHairProperties: '#b2b5be',
+  lineColor: '#31384a',
+  textColor: '#C5CDE1',
+  upColor: '#63C9A2',
+  downColor: '#FC4E56',
+  borderUpColor: '#63C9A2',
+  borderDownColor: '#FC4E56',
+  wickUpColor: '#63C9A2',
+  wickDownColor: '#FC4E56',
+  volume0: '#FC4E56',
+  volume1: '#63C9A2'
+}
+export const ThemeWhite = {
+  theme: '',
+  toolbar_bg: '#fff',
+  background: '#fff',
+  vertGridProperties: '#EBF0F2',
+  horzGridProperties: '#EBF0F2',
+  crossHairProperties: '#b2b5be',
+  lineColor: '#EBF0F2',
+  textColor: '#707A8A',
+  upColor: '#63C9A2',
+  downColor: '#FC4E56',
+  borderUpColor: '#63C9A2',
+  borderDownColor: '#FC4E56',
+  wickUpColor: '#63C9A2',
+  wickDownColor: '#FC4E56',
+  volume0: '#FC4E56',
+  volume1: '#63C9A2'
+}
