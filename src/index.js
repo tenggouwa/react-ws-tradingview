@@ -8,7 +8,7 @@ import reduxPromise from 'redux-promise';
 import reducers from './reducers';
 import Router from './router';
 // import CommonHeader from '@/components/commonHeader';
-import CommonHeader from '@/components/commonHeader/header';
+// import CommonHeader from '@/components/commonHeader/header';
 import CommonHook from '@/components/commonHook';
 import Websocket from '@/components/websocket'
 import './assets/iconfont/iconfont.scss'
@@ -34,7 +34,7 @@ function renderWithHotReload(Router) {
       <Provider store={store}>
         <HashRouter>
           <CommonHook />
-          <CommonHeader />
+          {/* <CommonHeader /> */}
           <Websocket />
           <Router />
         </HashRouter>

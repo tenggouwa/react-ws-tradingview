@@ -1,18 +1,15 @@
 /* eslint-disable */
 import React from 'react'
-import { Datafeeds, extraConfig } from './datafees'
-
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { chooseContractName } from '@/assets/js/common'
+import VConsole from 'vconsole';
+
+import { Datafeeds, extraConfig } from './datafees'
 import { widget } from '../../../static/TradingView/charting_library';
 import './index.scss'
 
-function getLanguageFromURL() {
-	const regex = new RegExp('[\\?&]lang=([^&#]*)');
-	const results = regex.exec(window.location.search);
-	return results === null ? null : decodeURIComponent(results[1].replace(/\+/g, ' '));
-}
+new VConsole();
 
 @withRouter
 @connect(state => ({
@@ -35,7 +32,29 @@ export default class index extends React.Component {
     this.lastHistoryKlineTime = '' // 缓存当前最后一个历史点
     this.newestKlineTime = '' // 缓存当前最右侧的实时点
   }
+	// static defaultProps = {
+	// 	symbol: 'AAPL',
+	// 	containerId: 'tv_chart_container',
+	// 	libraryPath: '../../../../static/TradingView/charting_library/',
+	// 	clientId: 'tradingview.com',
+	// 	userId: 'public_user_id',
+	// 	fullscreen: false,
+	// 	autosize: true,
+	// 	studiesOverrides: {},
+	// };
+
 	tvWidget = null;
+
+  componentDidMount() {
+    if (!window.bridge) return
+    window.bridge.callHandler('tvInit', response ,(resp) => {
+      console.log('tvInit', )
+    })
+    // window.bridge.registerHandler("getUserInfos", (data,responseCallback) => {
+    //   console.log('getUserInfos is called')
+    //   responseCallback('js callback to java');
+    // });
+  }
 
   componentWillReceiveProps(props) {
     if (props.type === '2' && props.usdkData && props.usdkData !== this.props.usdkData) {
@@ -47,7 +66,6 @@ export default class index extends React.Component {
       this.initTradingview(props)
     }
     if (props.type === '1' && props.contractData && props.contractData !== this.props.contractData) {
-      // console.log(22222, this.tvWidget);
       this.tradePricePrecision = props.contractData.contractTradePricePrecision
       if (this.tvWidget) {
         this.setSymbolName(this.filterContractName(props))
@@ -72,7 +90,6 @@ export default class index extends React.Component {
   }
   
 	initTradingview (props) {
-    console.log(1111);
     const { lang } = props || this.props
     let tvLang = lang
     switch (lang) {
@@ -93,7 +110,6 @@ export default class index extends React.Component {
       container_id: 'tv_chart_container',
       library_path: '/static/TradingView/charting_library/',
       timezone: 'Asia/Shanghai',
-      // exchange: 'ultrdax',
       // custom_css_url: 'css/tradingview_night.css',
       locale: tvLang,
       fullscreen: false,
@@ -109,11 +125,11 @@ export default class index extends React.Component {
         'adaptive_logo',
         'hide_resolution_in_legend',
         'edit_buttons_in_legend',
-        'timeframes_toolbar',
         'go_to_date',
-        'volume_force_overlay',
+        'timeframes_toolbar',
         // 'create_volume_indicator_by_default_once',
         // 'create_volume_indicator_by_default',
+        'volume_force_overlay', // 成交量 是否用横线隔开
         'header_symbol_search',
         'header_undo_redo',
         'caption_button_text_if_possible',
@@ -122,27 +138,36 @@ export default class index extends React.Component {
         'show_interval_dialog_on_key_press',
         'header_compare',
         'header_screenshot',
-        'header_saveload'
+        'header_saveload',
+        'display_market_status',
+        // 'Market Open',
       ],
       enabled_features: [
         'left_toolbar',
+        // 'timeframes_toolbar',
+        // 'Timezone',
+        // 'Toggle Percentage',
+        // 'Toggle Logo Scale',
+        // 'Toggle Auto Scale',
         'hide_left_toolbar_by_default'
       ],
+      context_menus: [
+        'legend_context_menu',
+      ],
+      time_frames: [],
       overrides: {
         // ======整体背景以及刻度线======
         'volumePaneSize': 'medium', // large, medium, small, tiny
-        // 'symbolWatermarkProperties.transparency': 90, // 水印的主要配置
         'symbolWatermarkProperties.color': 'rgba(0,0,0,0)', // 水印的主要配置
-        // 'paneProperties.background': '#020E25',
         'paneProperties.background': '#131722',
         'paneProperties.vertGridProperties.color': '#363c4e',
         'paneProperties.horzGridProperties.color': '#363c4e',
         'paneProperties.backgroundType': 'solid', // or 'gradient'
         'paneProperties.horzGridProperties.color': "#252a38", // 纵轴刻度线颜色
         'paneProperties.horzGridProperties.style': 0,
-        'paneProperties.crossHairProperties.color': "#252a38", // 横轴刻度线颜色
+        'paneProperties.crossHairProperties.color': "#b2b5be", // 十字线颜色
         'paneProperties.crossHairProperties.width': 1,
-        'paneProperties.crossHairProperties.style': 0,
+        'paneProperties.crossHairProperties.style': 2,
 
         'scalesProperties.fontSize': 11,
         'scalesProperties.lineColor' : "#31384a", // x轴 y轴颜色
