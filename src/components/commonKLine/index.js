@@ -11,6 +11,16 @@ import './index.scss'
 
 new VConsole();
 
+function setupWebViewJavascriptBridge(callback) {
+	if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+	if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+	window.WVJBCallbacks = [callback];
+	var WVJBIframe = document.createElement('iframe');
+	WVJBIframe.style.display = 'none';
+	WVJBIframe.src = 'https://__bridge_loaded__';
+	document.documentElement.appendChild(WVJBIframe);
+	setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+}
 @withRouter
 @connect(state => ({
     apis: state.apis,
@@ -21,48 +31,64 @@ new VConsole();
     ws7: state.wsData.ws_7,
     wsObj: state.wsObj,
     sendWs: state.sendWs,
-    wsConnet: state.wsConnet
+    wsConnet: state.wsConnet,
+    setLang: state.setLang,
+    getUsdkData: state.getUsdkData,
+    getContractData: state.getContractData,
 }))
 export default class index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      theme: ThemeWhite
+      theme: ThemeWhite,
     }
     this.cacheData = {}
     this.resolution = '15'
     this.lastHistoryKlineTime = '' // 缓存当前最后一个历史点
     this.newestKlineTime = '' // 缓存当前最右侧的实时点
   }
-	// static defaultProps = {
-	// 	symbol: 'AAPL',
-	// 	containerId: 'tv_chart_container',
-	// 	libraryPath: '../../../../static/TradingView/charting_library/',
-	// 	clientId: 'tradingview.com',
-	// 	userId: 'public_user_id',
-	// 	fullscreen: false,
-	// 	autosize: true,
-	// 	studiesOverrides: {},
-	// };
-
 	tvWidget = null;
 
   componentDidMount() {
-    if (!window.bridge) return
-    window.bridge.callHandler('tvInit', response ,(resp) => {
-      console.log('tvInit', )
+    const _that = this;
+    setupWebViewJavascriptBridge(function(bridge) {
+      bridge.registerHandler('tvInit', (data, responseCallback) => {
+        const {
+          type,
+          klineId,
+          resolution,
+          theme,
+          lang,
+        } = data;
+        console.log('getData', data);
+        _that.initTv(type, klineId);
+        if (_that.tvWidget) {
+          _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
+        } else {
+          _that.resolution = resolution;
+        }
+        _that.setState({
+          theme: theme === 'Dark' ? ThemeDark: ThemeWhite
+        })
+        _that.props.dispatch(_that.props.setLang(lang))
+        // const params = {
+        //   type: 1, // 1合约 2现货
+        //   klineId: 1, // assetId / contractId,
+        //   resolution: 1,
+        //   theme: 'Dark', // Dark / White
+        //   lang: 'en', 
+        // }
+      });
     })
-    // window.bridge.registerHandler("getUserInfos", (data,responseCallback) => {
-    //   console.log('getUserInfos is called')
-    //   responseCallback('js callback to java');
-    // });
   }
 
   componentWillReceiveProps(props) {
     if (props.type === '2' && props.usdkData && props.usdkData !== this.props.usdkData) {
       this.tradePricePrecision = props.usdkData.usdkTradePricePrecision
       if (this.tvWidget) {
-        this.setSymbolName(props.usdkData.assetName)
+        if (props.usdkData.assetName !== this.props.usdkData.assetName) {
+          this.setSymbolName(props.usdkData.assetName)
+        }
         return
       }
       this.initTradingview(props)
@@ -70,7 +96,9 @@ export default class index extends React.Component {
     if (props.type === '1' && props.contractData && props.contractData !== this.props.contractData) {
       this.tradePricePrecision = props.contractData.contractTradePricePrecision
       if (this.tvWidget) {
-        this.setSymbolName(this.filterContractName(props))
+        if (this.filterContractName(props) !== this.filterContractName(this.props)) {
+          this.setSymbolName(this.filterContractName(props))
+        }
         return
       }
       this.initTradingview(props)
@@ -83,6 +111,14 @@ export default class index extends React.Component {
     }
     if (this.tvWidget && this.props.lang !== props.lang) {
       this.initTradingview(props)
+    }
+  }
+
+  initTv = async (type, id) => {
+    if (type === '1') {
+      await this.props.dispatch(this.props.getContractData(id))
+    } else {
+      await this.props.dispatch(this.props.getUsdkData(id))
     }
   }
 
@@ -129,6 +165,8 @@ export default class index extends React.Component {
         'edit_buttons_in_legend',
         'go_to_date',
         'timeframes_toolbar',
+        'header_fullscreen_button', // 全屏
+        'header_settings', // 头部设置按钮
         // 'create_volume_indicator_by_default_once',
         // 'create_volume_indicator_by_default',
         'volume_force_overlay', // 成交量 是否用横线隔开
@@ -199,51 +237,6 @@ export default class index extends React.Component {
     // this.tvWidget = new TradingView.widget(widgetOptions)
     this.tvWidget = new widget(widgetOptions);
     const tvWidget = this.tvWidget || {}
-    const { resolution } = this
-
-    const createButton = (buttons) => {
-      for (let i = 0; i < buttons.length; i += 1) {
-        (function(button) {
-          const btn = tvWidget.createButton({ align: 'left' })
-          btn.textContent = button.title
-          // btn.classList.add('mydate')
-          btn.parentNode.parentNode.classList.add('btn');
-          if (button.resolution === resolution) {
-            btn.classList.add('active')
-            btn.style.color = '#1976d2'
-          } else {
-            btn.style.color = theme.textColor
-          }
-          btn.addEventListener('click', (e) => {
-            if (btn.className.indexOf('active') > -1) return false
-            const current = e.currentTarget.parentNode.parentNode.parentElement.childNodes
-            for (let index of current) {
-              if (index.className.indexOf('btn') > -1) {
-                const childNode = index.childNodes[0].childNodes[0]
-                if (childNode.className.indexOf('active') > -1) {
-                  childNode.className = childNode.className.replace('active', '')
-                  childNode.style.color = theme.textColor
-                }
-              }
-            }
-            btn.className = `${btn.className} active`
-            btn.style.color = '#1976d2'
-            tvWidget.chart().setResolution(button.resolution, function onReadyCallback() {})
-          });
-        })(buttons[i])
-      }
-    }
-    const buttons = [
-      { title: '1m', resolution: '1', chartType: 1 },
-      { title: '5m', resolution: '5', chartType: 1 },
-      { title: '15m', resolution: '15', chartType: 1 },
-      { title: '30m', resolution: '30', chartType: 1 },
-      { title: '1h', resolution: '60', chartType: 1 },
-      { title: '4h', resolution: '240', chartType: 1 },
-      { title: '6h', resolution: '360', chartType: 1 },
-      { title: '1D', resolution: '1D', chartType: 1 },
-      { title: '1W', resolution: '1W', chartType: 1 },
-    ]
     const MA_LINES = [
       { time: 5, color: '#b9b9b9' },
       { time: 10, color: '#e0db1a' },
@@ -252,7 +245,7 @@ export default class index extends React.Component {
 
 		tvWidget.onChartReady(() => {
 			tvWidget.headerReady().then(() => {
-        createButton(buttons)
+        // createButton(buttons)
         MA_LINES.forEach(item => {
           this.tvWidget.chart().createStudy(
             'Moving Average',
@@ -269,6 +262,7 @@ export default class index extends React.Component {
 			});
 		});
 	}
+  
 
 	componentWillUnmount() {
 		if (this.tvWidget !== null) {
@@ -352,9 +346,10 @@ export default class index extends React.Component {
   }
 
   setSymbolName(symbolName) {
+    console.log('wocao', symbolName, this.resolution);
     try {
       this.lastHistoryKlineTime = null
-      this.tvWidget.chart().setSymbol(symbolName, () => {})
+      this.tvWidget.chart().setSymbol(symbolName, this.resolution, () => {})
     } catch (e) {
       throw new Error(e)
     }
