@@ -1,5 +1,4 @@
 import React from 'react';
-import QRCode from 'qrcode.react'
 
 import ModelPng from '@/assets/img/home/models.png';
 import IosPng from '@/assets/img/home/ios.png';
@@ -31,13 +30,6 @@ const HomeCode = () => {
             <img src={Android} alt="" />
             <span>Android</span>
           </div>
-        </div>
-
-        <div className="homeCode-code">
-          <div className="code">
-            <QRCode size={118} value="https://invite.tsex.io/#/?type=downLoad" />
-          </div>
-          <span>ios & Android 扫码下载</span>
         </div>
       </div>
     </div>

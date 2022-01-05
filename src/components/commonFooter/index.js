@@ -107,11 +107,6 @@ const CommonFooter = ({ props }) => {
         </div>
       </div>
 
-      <div className="footer-text">
-          客服：tsex@7171dy.com
-      </div>
-
-
     </div>
   );
 };
