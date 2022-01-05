@@ -9,7 +9,9 @@ import { Datafeeds, extraConfig, ThemeDark, ThemeWhite } from './datafees'
 import { widget } from '../../../static/TradingView/charting_library';
 import './index.scss'
 
-new VConsole();
+if (window.location.protocol === 'http:') {
+  new VConsole();
+}
 
 function setupWebViewJavascriptBridge(callback) {
 	if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
