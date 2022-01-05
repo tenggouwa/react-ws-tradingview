@@ -54,7 +54,7 @@ export default class index extends React.Component {
 
   componentDidMount() {
     const _that = this;
-    // _that.initTv('1', 9);
+    _that.initTv('1', 9);
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         const {
