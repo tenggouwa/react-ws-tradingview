@@ -62,13 +62,6 @@ module.exports = {
                       "@babel/plugin-transform-runtime",
                       "@babel/plugin-transform-async-to-generator",
                       "@babel/plugin-proposal-class-properties",
-                      [
-                        require.resolve('babel-plugin-import'),// 导入 import 插件
-                          {
-                            libraryName: 'antd', //暴露antd
-                            style: "css"
-                          }
-                      ]
                     ]
                   }
                 }
