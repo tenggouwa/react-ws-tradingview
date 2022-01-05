@@ -74,6 +74,44 @@ module.exports = {
                 }
               ]
             },
+  //           { test:/\.css$/, use: ['style-loader', 'css-loader']}, //匹配所有已.css结尾的文件
+  // 　　　　　　{ test:/\.scss$/, use: ['style-loader', 'css-loader','sass-loader']},
+  // 　　　　　　{
+  //               test:/\.less$/,
+  //               use: [
+  //                   'style-loader',
+  //                   'css-loader',
+  //                   {
+  //                       loader: "less-loader",
+  //                       options: {
+  //                           lessOptions: {
+  //                             javascriptEnabled: true,
+  //                           }
+  //                       }
+  //                   }
+  //               ]
+  //           },
+            // {
+            //   test: /\.css$/i,
+            //   use: [{
+            //     loader: MiniCssExtractPlugin.loader,
+            //     options: {
+            //       publicPath: './dist'
+            //     },
+            //   }, 'css-loader', 'sass-loader', 'less-loader'], // "css-loader" 将 CSS 转化成 CommonJS 模块
+            //   exclude: /node_modules/
+            // },
+            // // 配置.scss正则等
+            // {
+            //   test: /\.scss$/i,
+            //   use: ['style-loader', 'css-loader', 'sass-loader'], // "css-loader" 将 CSS 转化成 CommonJS 模块
+            //   exclude: /node_modules/
+            // },
+            // {
+            //   test: /\.less$/i,
+            //   use: ['style-loader', 'css-loader', 'less-loader'], // "css-loader" 将 CSS 转化成 CommonJS 模块
+            //   exclude: /node_modules/
+            // },
             {
               test: /\.css$/,
               use: [
