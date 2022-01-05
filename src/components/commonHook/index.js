@@ -8,8 +8,8 @@ import { compose } from 'lodash/fp'
 @connect(state => ({
     userAuth: state.userAuth,
     swith: state.swith,
-    getUserAuth: state.getUserAuth,
-    clearUserAuth: state.clearUserAuth,
+    // getUserAuth: state.getUserAuth,
+    // clearUserAuth: state.clearUserAuth,
     setWs: state.setWs,
     setWsData: state.setWsData,
     clearWsData: state.clearWsData,
@@ -27,10 +27,10 @@ export default class Hook extends Component {
             langSrc,
             lang,
             dispatch,
-            getUserAuth,
+            // getUserAuth,
             history,
         } = this.props
-        compose(dispatch, getUserAuth)()
+        // compose(dispatch, getUserAuth)()
         window.t = function t(path = '.', src = langSrc[lang].translation) {
             const pathArray = path.split('.')
             return pathArray.length > 2 ? src[pathArray[0]][pathArray[1]][pathArray[2]] : src[pathArray[0]][pathArray[1]]
