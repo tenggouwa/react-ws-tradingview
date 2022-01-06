@@ -97,11 +97,15 @@ export default class index extends React.Component {
       }
       this.initTradingview(props)
     }
+    console.log('1111', props.contractData)
     if (props.type === '1' && props.contractData && props.contractData !== this.props.contractData) {
+      console.log(22222)
       this.tradePricePrecision = props.contractData.contractTradePricePrecision
       if (this.tvWidget) {
-        console.log(props.contractData, this.filterContractName(props));
+        console.log(33333)
+        console.log(9999, props.contractData, this.filterContractName(props));
         if (this.filterContractName(props) !== this.filterContractName(this.props)) {
+          console.log(44444, this.filterContractName(props))
           this.setSymbolName(this.filterContractName(props))
         }
         return
