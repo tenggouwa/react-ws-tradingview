@@ -54,7 +54,7 @@ export default class index extends React.Component {
 
   componentDidMount() {
     const _that = this;
-    _that.initTv('1', 9);
+    // _that.initTv('1', 9);
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         const {
@@ -171,8 +171,6 @@ export default class index extends React.Component {
         'timeframes_toolbar',
         'header_fullscreen_button', // 全屏
         'header_settings', // 头部设置按钮
-        // 'create_volume_indicator_by_default_once',
-        // 'create_volume_indicator_by_default',
         'volume_force_overlay', // 成交量 是否用横线隔开
         'header_symbol_search',
         'header_undo_redo',
@@ -184,16 +182,11 @@ export default class index extends React.Component {
         'header_screenshot',
         'header_saveload',
         'display_market_status',
-        // 'Market Open',
+        // 'legend_widget'
       ],
       enabled_features: [
         'left_toolbar',
-        // 'timeframes_toolbar',
-        // 'Timezone',
-        // 'Toggle Percentage',
-        // 'Toggle Logo Scale',
-        // 'Toggle Auto Scale',
-        'hide_left_toolbar_by_default'
+        'hide_left_toolbar_by_default',
       ],
       context_menus: [
         'legend_context_menu',
