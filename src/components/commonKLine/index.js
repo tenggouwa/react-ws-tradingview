@@ -54,7 +54,7 @@ export default class index extends React.Component {
 
   componentDidMount() {
     const _that = this;
-    // _that.initTv('1', 9);
+    // _that.initTv('1', 10);
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         const {
@@ -100,6 +100,7 @@ export default class index extends React.Component {
     if (props.type === '1' && props.contractData && props.contractData !== this.props.contractData) {
       this.tradePricePrecision = props.contractData.contractTradePricePrecision
       if (this.tvWidget) {
+        console.log(props.contractData, this.filterContractName(props));
         if (this.filterContractName(props) !== this.filterContractName(this.props)) {
           this.setSymbolName(this.filterContractName(props))
         }
