@@ -277,7 +277,7 @@ export default class index extends React.Component {
         resolution: resolution === 'D' ? '1W' : resolution,
         klineId: webData.klineId, // 从数据来选择
         type: webData.type,
-        limit: 150,
+        limit: 50,
         endTime: parseInt(((firstDataRequest ? Date.now() : this.lastHistoryKlineTime) / 1000), 10),
       }
     }
