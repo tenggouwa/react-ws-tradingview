@@ -102,7 +102,7 @@ export default class index extends React.Component {
   }
 
 	initTradingview (props) {
-    const { theme } = this.state;
+    const { theme, webData } = this.state;
     const { lang } = props || this.props
     let tvLang = lang
     switch (lang) {
@@ -117,7 +117,7 @@ export default class index extends React.Component {
     }
 		const widgetOptions = {
 			debug: !true,
-      symbol: ' ',
+      symbol: `${webData.type} - ${webData.klineId}`,
       datafeed: Object.assign({}, Datafeeds, extraConfig(this)),
       interval: this.resolution,
       container_id: 'tv_chart_container',
@@ -191,7 +191,7 @@ export default class index extends React.Component {
         'paneProperties.legendProperties.showStudyValues': true,
         'paneProperties.legendProperties.showSeriesTitle': false, // 是否展示 合约名称
         'paneProperties.legendProperties.showSeriesOHLC': true,
-        // 'paneProperties.legendProperties.showLegend': false,
+        'paneProperties.legendProperties.showLegend': false,
 
       },
       studies_overrides: {
