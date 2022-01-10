@@ -194,7 +194,7 @@ export default class index extends React.Component {
         'paneProperties.legendProperties.showStudyValues': true,
         'paneProperties.legendProperties.showSeriesTitle': false, // 是否展示 合约名称
         'paneProperties.legendProperties.showSeriesOHLC': true,
-        'paneProperties.legendProperties.showLegend': false,
+        // 'paneProperties.legendProperties.showLegend': false,
 
       },
       studies_overrides: {

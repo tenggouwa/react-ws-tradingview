@@ -131,7 +131,6 @@ module.exports = {
             minify: {
                 collapseWhitespace: true // 去除空白
             },
-            favicon: path.resolve(__dirname, '..', 'favicon.ico'),
         }),
         new copyWebpackPlugin([
             {
