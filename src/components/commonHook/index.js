@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { compose } from 'lodash/fp'
 
 // 公共路由钩子方法
 @withRouter
@@ -30,7 +29,6 @@ export default class Hook extends Component {
             // getUserAuth,
             history,
         } = this.props
-        // compose(dispatch, getUserAuth)()
         window.t = function t(path = '.', src = langSrc[lang].translation) {
             const pathArray = path.split('.')
             return pathArray.length > 2 ? src[pathArray[0]][pathArray[1]][pathArray[2]] : src[pathArray[0]][pathArray[1]]

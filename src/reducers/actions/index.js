@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions'
-import message from '@tenggouwa/message';
+import Message from '@/components/message'
 
 export default function createActionsHandler(apis) {
     // let wsObj
@@ -37,7 +37,7 @@ export default function createActionsHandler(apis) {
                     }
                 }
             } catch (e) {
-                // message.error(e.message)
+                // Message.error(e.message)
             }
             localStorage.userAuth = 0
             localStorage.auth = 0
@@ -59,7 +59,7 @@ export default function createActionsHandler(apis) {
                     }
                 }
             } catch (e) {
-                // message.error(e.message)
+                // Message.error(e.message)
             }
             return {
                 swith: false
@@ -78,7 +78,7 @@ export default function createActionsHandler(apis) {
                     }
                 }
             } catch (e) {
-                message.error(e.message)
+                Message.error(e.message)
             }
             return {
                 contractData: null,
@@ -97,7 +97,7 @@ export default function createActionsHandler(apis) {
                     }
                 }
             } catch (e) {
-                message.error(e.message)
+                Message.error(e.message)
             }
             return {
                 usdkData: null,

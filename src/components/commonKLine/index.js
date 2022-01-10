@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { chooseContractName } from '@/assets/js/common'
-import VConsole from 'vconsole';
+// import VConsole from 'vconsole';
 
 import { Datafeeds, extraConfig, ThemeDark, ThemeWhite } from './datafees'
 import { widget } from '../../../static/TradingView/charting_library';
@@ -12,7 +12,7 @@ import './index.scss'
 // if (window.location.protocol === 'http:') {
 //   new VConsole();
 // }
-new VConsole();
+// new VConsole();
 
 function setupWebViewJavascriptBridge(callback) {
 	if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
@@ -54,7 +54,7 @@ export default class index extends React.Component {
 
   componentDidMount() {
     const _that = this;
-    // _that.initTv('1', 10);
+    _that.initTv('1', 9);
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         const {

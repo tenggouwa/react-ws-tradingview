@@ -1,5 +1,5 @@
 import axios from 'axios'
-import message from '@tenggouwa/message'
+import Message from '@/components/message'
 import api from './api'
 import httpErrorHandler from './httpErrorHandler.js' // http错误处理
 
@@ -40,7 +40,7 @@ instance.interceptors.response.use((res) => {
         const value = res.data.msg ? res.data.msg : 0
         let msg = window.t(`errors.${res.data.code}`)
         msg = msg.replace('{value}', value)
-        message.error(`${res.data.code}: ${msg}`)
+        Message.error(`${res.data.code}: ${msg}`)
         return false
     }
     if (!res.config.unTs && res.data.code && res.data.code !== 0 && res.data.code !== 401 && res.data.code !== 101701 && res.data.code !== 86404 && res.data.code !== 101700 && res.data.code !== 120031) {
@@ -48,11 +48,11 @@ instance.interceptors.response.use((res) => {
         if (pathname.startsWith('/trade/futures') || pathname.startsWith('/trade/spot')) {
             let aL = window.t(`errors.${res.data.code}`)
             if (!aL || aL === `errors.${res.data.code}`) aL = window.t('errors.50000')
-            message.error(`${aL}-${res.data.code}`, 'night')
+            Message.error(`${aL}-${res.data.code}`, 'night')
         } else {
             let aL = window.t(`errors.${res.data.code}`)
             if (!aL || aL === `errors.${res.data.code}`) aL = window.t('errors.50000')
-            message.error(`${aL}-${res.data.code}`)
+            Message.error(`${aL}-${res.data.code}`)
         }
     }
     return res.data
@@ -76,7 +76,7 @@ function createApi(config) {
                     _t: Date.now()
                 }
             }).catch((e) => {
-                if (e) message.error(e.message || e.msg)
+                if (e) Message.error(e.message || e.msg)
                 return e || {}
             })
         }
@@ -86,7 +86,7 @@ function createApi(config) {
                 ...data,
             }
         }).catch((e) => {
-            if (e) message.error(e.message || e.msg)
+            if (e) Message.error(e.message || e.msg)
             return e || {}
         })
     }
