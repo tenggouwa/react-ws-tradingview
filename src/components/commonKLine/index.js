@@ -132,6 +132,7 @@ export default class index extends React.Component {
       autosize: true,
       theme: theme.theme,
       toolbar_bg: theme.toolbar_bg,
+      loading_screen: { backgroundColor: theme.toolbar_bg, foregroundColor: theme.toolbar_bg },
       disabled_features: [
         'Legend_widget',
         'main_series_scale_menu',
