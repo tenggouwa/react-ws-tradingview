@@ -65,10 +65,6 @@ export default class index extends React.Component {
       this.initTradingview(this.props)
     });
 
-    setTimeout(() => {
-      const a = document.getElementsByClassName('onlyOneButtonCanBeStick-2KhwsEwE')
-      console.log(a);
-    }, 1000)
     // setupWebViewJavascriptBridge(function(bridge) {
     //   bridge.registerHandler('tvInit', (data, responseCallback) => {
     //     const {
