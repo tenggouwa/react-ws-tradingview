@@ -54,7 +54,9 @@ export default class index extends React.Component {
 
   componentDidMount() {
     const _that = this;
-    _that.initTv('1', 9);
+    // _that.initTv('1', 9);
+
+    this.initTradingview(this.props)
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         const {
@@ -98,20 +100,20 @@ export default class index extends React.Component {
       this.initTradingview(props)
     }
     console.log('1111', props.contractData)
-    if (props.type === '1' && props.contractData && props.contractData !== this.props.contractData) {
-      console.log(22222)
-      this.tradePricePrecision = props.contractData.contractTradePricePrecision
-      if (this.tvWidget) {
-        console.log(33333)
-        console.log(9999, props.contractData, this.filterContractName(props));
-        if (this.filterContractName(props) !== this.filterContractName(this.props)) {
-          console.log(44444, this.filterContractName(props))
-          this.setSymbolName(this.filterContractName(props))
-        }
-        return
-      }
-      this.initTradingview(props)
-    }
+    // if (props.type === '1' && props.contractData && props.contractData !== this.props.contractData) {
+    //   console.log(22222)
+    //   this.tradePricePrecision = props.contractData.contractTradePricePrecision
+    //   if (this.tvWidget) {
+    //     console.log(33333)
+    //     console.log(9999, props.contractData, this.filterContractName(props));
+    //     if (this.filterContractName(props) !== this.filterContractName(this.props)) {
+    //       console.log(44444, this.filterContractName(props))
+    //       this.setSymbolName(this.filterContractName(props))
+    //     }
+    //     return
+    //   }
+    //   this.initTradingview(props)
+    // }
     if (props.ws7 && props.ws7 !== this.props.ws7) {
       this.formatKlineData(props.ws7)
     }
@@ -152,7 +154,8 @@ export default class index extends React.Component {
     }
 		const widgetOptions = {
 			debug: !true,
-      symbol: props.type === '2' ? props.usdkData.assetName : this.filterContractName(props),
+      symbol: ' ',
+      // symbol: props.type === '2' ? props.usdkData.assetName : this.filterContractName(props),
       datafeed: Object.assign({}, Datafeeds, extraConfig(this)),
       interval: this.resolution,
       container_id: 'tv_chart_container',
@@ -308,7 +311,8 @@ export default class index extends React.Component {
       contractData,
       type
     } = this.props
-    const assetId = type === '2' ? usdkData.assetId : contractData.contractId
+    // const assetId = type === '2' ? usdkData.assetId : contractData.contractId
+    const assetId = 9
     const params = {
       reqType: 7,
       type: firstDataRequest ? 1 : 3, // 是否第一次加载历史
@@ -332,7 +336,7 @@ export default class index extends React.Component {
       contractData,
       type
     } = this.props
-    const assetId = type === '2' ? usdkData.assetId : contractData.contractId
+    const assetId = 9
     const params = {
       reqType: 7,
       type: 2,
