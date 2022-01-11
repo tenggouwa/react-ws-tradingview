@@ -56,6 +56,7 @@ export default class index extends React.Component {
     const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
+        console.log('data', data);
         _that.setState({
           webData: data,
           theme: data.theme === 'Dark' ? ThemeDark: ThemeWhite
@@ -66,28 +67,10 @@ export default class index extends React.Component {
             _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
           } else {
             _that.resolution = resolution;
+            _that.initTradingview(_that.props)
           }
           _that.props.dispatch(_that.props.setLang(lang))
-          _that.initTradingview(_that.props)
         });
-        // const {
-        //   type,
-        //   klineId,
-        //   resolution,
-        //   theme,
-        //   lang,
-        // } = data;
-        // console.log('getData', data);
-        // _that.initTv(type, klineId);
-        // if (_that.tvWidget) {
-        //   _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
-        // } else {
-        //   _that.resolution = resolution;
-        // }
-        // _that.setState({
-        //   theme: theme === 'Dark' ? ThemeDark: ThemeWhite
-        // })
-        // _that.props.dispatch(_that.props.setLang(lang))
       });
     })
   }
