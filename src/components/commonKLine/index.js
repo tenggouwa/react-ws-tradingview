@@ -32,14 +32,7 @@ export default class index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      webData: {
-        // type: '1',
-        // klineId: '9',
-        // resolution: '15',
-        // theme: 'White',
-        // lang: 'zh',
-        // pre: 2,
-      },
+      webData: {},
       theme: ThemeWhite,
     }
     this.cacheData = {}
@@ -50,8 +43,25 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
+    const mockData = {
+      type: '1',
+      klineId: '9',
+      resolution: '15',
+      theme: 'Dark',
+      lang: 'zh',
+      pre: 2,
+    }
+    this.setState({
+      webData: mockData,
+      theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
+    }, () => {
+      const { resolution, lang, pre } = this.state.webData
+      this.tradePricePrecision = pre || 4
+      this.resolution = resolution;
+      this.props.dispatch(this.props.setLang(lang))
+      if (!this.tvWidget) this.initTradingview(this.props)
+    });
     const _that = this;
-    console.log(111111, _that.tvWidget);
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         console.log('data', data);
@@ -154,6 +164,7 @@ export default class index extends React.Component {
         'header_screenshot',
         'header_saveload',
         'display_market_status',
+        'use_localstorage_for_settings'
       ],
       enabled_features: [
         'left_toolbar',
@@ -175,6 +186,7 @@ export default class index extends React.Component {
         'scalesProperties.fontSize': 11,
         'scalesProperties.lineColor' : theme.lineColor, // x轴 y轴颜色
         'scalesProperties.textColor': theme.textColor, // x轴 y轴文字颜色
+        // 'scalesProperties.backgroundColor' : "#090",
 
         'mainSeriesProperties.style': 1,
         'mainSeriesProperties.showCountdown': true, // 是否展示倒计时

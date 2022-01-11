@@ -56,8 +56,8 @@ export function extraConfig(self) {
 
 export const ThemeDark = {
   theme: 'Dark',
-  toolbar_bg: '#131722',
-  background: '#131722',
+  toolbar_bg: '#0C1115',
+  background: '#0C1115',
   vertGridProperties: '#363c4e',
   horzGridProperties: '#252a38',
   crossHairProperties: '#b2b5be',
@@ -73,7 +73,7 @@ export const ThemeDark = {
   volume1: '#63C9A2'
 }
 export const ThemeWhite = {
-  theme: '',
+  theme: 'White',
   toolbar_bg: '#fff',
   background: '#fff',
   vertGridProperties: '#EBF0F2',
