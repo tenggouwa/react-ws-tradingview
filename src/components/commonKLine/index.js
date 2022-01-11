@@ -53,22 +53,22 @@ export default class index extends React.Component {
     // }
 
     
-
+    const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
-        this.setState({
+        _that.setState({
           webData: data,
           theme: data.theme === 'Dark' ? ThemeDark: ThemeWhite
         }, () => {
-          const { resolution, lang, pre } = this.state.webData
-          this.tradePricePrecision = pre
-          if (this.tvWidget) {
-            this.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
+          const { resolution, lang, pre } = _that.state.webData
+          _that.tradePricePrecision = pre
+          if (_that.tvWidget) {
+            _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
           } else {
-            this.resolution = resolution;
+            _that.resolution = resolution;
           }
-          this.props.dispatch(this.props.setLang(lang))
-          this.initTradingview(this.props)
+          _that.props.dispatch(_that.props.setLang(lang))
+          _that.initTradingview(_that.props)
         });
         // const {
         //   type,
