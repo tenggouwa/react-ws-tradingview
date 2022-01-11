@@ -5,8 +5,10 @@ import { withRouter } from 'react-router'
 
 import { Datafeeds, extraConfig, ThemeDark, ThemeWhite } from './datafees'
 import { widget } from '../../../static/TradingView/charting_library';
+import VConsole from 'vconsole';
 import './index.scss'
 
+new VConsole();
 function setupWebViewJavascriptBridge(callback) {
 	if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
 	if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
@@ -41,52 +43,53 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
-    const mockData = {
-      type: '1',
-      klineId: '9',
-      resolution: '15',
-      theme: 'White',
-      lang: 'zh',
-      pre: 2,
-    }
+    // const mockData = {
+    //   type: '1',
+    //   klineId: '9',
+    //   resolution: '15',
+    //   theme: 'White',
+    //   lang: 'zh',
+    //   pre: 2,
+    // }
 
-    this.setState({
-      webData: mockData,
-      theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
-    }, () => {
-      const { resolution, lang, pre } = this.state.webData
-      this.tradePricePrecision = pre
-      if (this.tvWidget) {
-        this.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
-      } else {
-        this.resolution = resolution;
-      }
-      this.props.dispatch(this.props.setLang(lang))
-      this.initTradingview(this.props)
-    });
+    
 
-    // setupWebViewJavascriptBridge(function(bridge) {
-    //   bridge.registerHandler('tvInit', (data, responseCallback) => {
-    //     const {
-    //       type,
-    //       klineId,
-    //       resolution,
-    //       theme,
-    //       lang,
-    //     } = data;
-    //     console.log('getData', data);
-    //     _that.initTv(type, klineId);
-    //     if (_that.tvWidget) {
-    //       _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
-    //     } else {
-    //       _that.resolution = resolution;
-    //     }
-    //     _that.setState({
-    //       theme: theme === 'Dark' ? ThemeDark: ThemeWhite
-    //     })
-    //     _that.props.dispatch(_that.props.setLang(lang))
-    //   });
-    // })
+    setupWebViewJavascriptBridge(function(bridge) {
+      bridge.registerHandler('tvInit', (data, responseCallback) => {
+        this.setState({
+          webData: data,
+          theme: data.theme === 'Dark' ? ThemeDark: ThemeWhite
+        }, () => {
+          const { resolution, lang, pre } = this.state.webData
+          this.tradePricePrecision = pre
+          if (this.tvWidget) {
+            this.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
+          } else {
+            this.resolution = resolution;
+          }
+          this.props.dispatch(this.props.setLang(lang))
+          this.initTradingview(this.props)
+        });
+        // const {
+        //   type,
+        //   klineId,
+        //   resolution,
+        //   theme,
+        //   lang,
+        // } = data;
+        // console.log('getData', data);
+        // _that.initTv(type, klineId);
+        // if (_that.tvWidget) {
+        //   _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
+        // } else {
+        //   _that.resolution = resolution;
+        // }
+        // _that.setState({
+        //   theme: theme === 'Dark' ? ThemeDark: ThemeWhite
+        // })
+        // _that.props.dispatch(_that.props.setLang(lang))
+      });
+    })
   }
 
   componentWillReceiveProps(props) {
