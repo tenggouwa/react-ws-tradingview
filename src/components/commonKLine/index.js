@@ -61,7 +61,7 @@ export default class index extends React.Component {
     //   this.props.dispatch(this.props.setLang(lang))
     //   if (!this.tvWidget) this.initTradingview(this.props)
     // });
-    // const _that = this;
+    const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         console.log('data', data);
