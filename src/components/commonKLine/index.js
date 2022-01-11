@@ -43,25 +43,25 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
-    const mockData = {
-      type: '1',
-      klineId: '9',
-      resolution: '15',
-      theme: 'Dark',
-      lang: 'zh',
-      pre: 2,
-    }
-    this.setState({
-      webData: mockData,
-      theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
-    }, () => {
-      const { resolution, lang, pre } = this.state.webData
-      this.tradePricePrecision = pre || 4
-      this.resolution = resolution;
-      this.props.dispatch(this.props.setLang(lang))
-      if (!this.tvWidget) this.initTradingview(this.props)
-    });
-    const _that = this;
+    // const mockData = {
+    //   type: '1',
+    //   klineId: '9',
+    //   resolution: '15',
+    //   theme: 'Dark',
+    //   lang: 'zh',
+    //   pre: 2,
+    // }
+    // this.setState({
+    //   webData: mockData,
+    //   theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
+    // }, () => {
+    //   const { resolution, lang, pre } = this.state.webData
+    //   this.tradePricePrecision = pre || 4
+    //   this.resolution = resolution;
+    //   this.props.dispatch(this.props.setLang(lang))
+    //   if (!this.tvWidget) this.initTradingview(this.props)
+    // });
+    // const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         console.log('data', data);
