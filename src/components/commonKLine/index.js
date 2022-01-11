@@ -32,7 +32,14 @@ export default class index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      webData: {},
+      webData: {
+        // type: '1',
+        // klineId: '9',
+        // resolution: '15',
+        // theme: 'White',
+        // lang: 'zh',
+        // pre: 2,
+      },
       theme: ThemeWhite,
     }
     this.cacheData = {}
@@ -43,17 +50,8 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
-    // const mockData = {
-    //   type: '1',
-    //   klineId: '9',
-    //   resolution: '15',
-    //   theme: 'White',
-    //   lang: 'zh',
-    //   pre: 2,
-    // }
-
-    
     const _that = this;
+    console.log(111111, _that.tvWidget);
     setupWebViewJavascriptBridge(function(bridge) {
       bridge.registerHandler('tvInit', (data, responseCallback) => {
         console.log('data', data);
@@ -62,17 +60,27 @@ export default class index extends React.Component {
           theme: data.theme === 'Dark' ? ThemeDark: ThemeWhite
         }, () => {
           const { resolution, lang, pre } = _that.state.webData
-          _that.tradePricePrecision = pre
-          if (_that.tvWidget) {
-            _that.tvWidget.chart().setResolution(resolution, function onReadyCallback() {});
-          } else {
-            _that.resolution = resolution;
-            _that.initTradingview(_that.props)
-          }
+          _that.tradePricePrecision = pre || 4
+          _that.resolution = resolution;
           _that.props.dispatch(_that.props.setLang(lang))
+          if (!_that.tvWidget) _that.initTradingview(_that.props)
         });
       });
     })
+  }
+
+
+  componentDidUpdate(preProps, { webData }) {
+    if (Object.keys(this.state.webData).length === 0 || Object.keys(webData).length === 0) return false;
+    console.log('componentDidUpdate', 1);
+    if (webData.resolution !== this.state.webData.resolution) {
+      console.log('componentDidUpdate', 2, webData.resolution, this.state.webData.resolution)
+      this.tvWidget.chart().setResolution(this.state.webData.resolution, function onReadyCallback() {})
+    }
+    if ((webData.type !== this.state.webData.type) || (webData.klineId !== this.state.webData.klineId)) {
+      console.log('componentDidUpdate', 3, webData.type, this.state.webData.type)
+      this.setSymbolName(`${this.state.webData.type} - ${this.state.webData.klineId}`)
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -87,9 +95,17 @@ export default class index extends React.Component {
     }
   }
 
+	componentWillUnmount() {
+		if (this.tvWidget !== null) {
+			this.tvWidget.remove();
+			this.tvWidget = null;
+		}
+	}
+
 	initTradingview (props) {
     const { theme, webData } = this.state;
     const { lang } = props || this.props
+    console.log('init', this.resolution, webData, lang);
     let tvLang = lang
     switch (lang) {
       case 'tw':
@@ -211,13 +227,7 @@ export default class index extends React.Component {
         })
 			});
 		});
-	}
-
-	componentWillUnmount() {
-		if (this.tvWidget !== null) {
-			this.tvWidget.remove();
-			this.tvWidget = null;
-		}
+    console.log('initEnd')
 	}
 
   formatKlineData(ws7) {
@@ -285,6 +295,7 @@ export default class index extends React.Component {
   }
 
   setSymbolName(symbolName) {
+    console.log('setSymbolName', symbolName, this.resolution);
     try {
       this.lastHistoryKlineTime = null
       this.tvWidget.chart().setSymbol(symbolName, this.resolution, () => {})
