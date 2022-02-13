@@ -11,6 +11,8 @@ import './index.scss'
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
 // const isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
+const First = true
+
 new VConsole();
 function setupWebViewJavascriptBridge(callback) {
   // 安卓
@@ -79,8 +81,9 @@ export default class index extends React.Component {
 
     const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
-      if (isAndroid) {
+      if (isAndroid && First) {
         console.log('init');
+        First = false
         bridge.init(function(message, responseCallback) { });
       }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
