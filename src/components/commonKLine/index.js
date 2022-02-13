@@ -8,9 +8,6 @@ import { widget } from '../../../static/TradingView/charting_library';
 import VConsole from 'vconsole';
 import './index.scss'
 
-console.log('这是从头来的');
-
-
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
 // const isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
