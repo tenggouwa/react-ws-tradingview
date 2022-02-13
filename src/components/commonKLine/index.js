@@ -8,8 +8,23 @@ import { widget } from '../../../static/TradingView/charting_library';
 import VConsole from 'vconsole';
 import './index.scss'
 
+
+const isAndroid = navigator.userAgent.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+// const isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
 new VConsole();
 function setupWebViewJavascriptBridge(callback) {
+  // 安卓
+  if (isAndroid) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function() {
+        callback(window.WebViewJavascriptBridge)
+      }, false);
+    }
+  }
+  // IOS
 	if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
 	if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
 	window.WVJBCallbacks = [callback];
@@ -61,13 +76,22 @@ export default class index extends React.Component {
     //   this.props.dispatch(this.props.setLang(lang))
     //   if (!this.tvWidget) this.initTradingview(this.props)
     // });
+
     const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
+      if (isAndroid) {
+        bridge.init();
+      }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
-        console.log('data', data);
+        console.log(11111, data);
+        let finallyData = data
+        if (Object.prototype.toString.call(data) === "[object String]") {
+          finallyData = JSON.parse(data);
+        }
+        console.log('data ====>', finallyData);
         _that.setState({
-          webData: data,
-          theme: data.theme === 'Dark' ? ThemeDark: ThemeWhite
+          webData: finallyData,
+          theme: finallyData.theme === 'Dark' ? ThemeDark: ThemeWhite
         }, () => {
           const { resolution, lang, pre } = _that.state.webData
           _that.tradePricePrecision = pre || 4
