@@ -58,6 +58,7 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
+    console.log(1111111);
     const mockData = {
       type: '1',
       klineId: '9',
