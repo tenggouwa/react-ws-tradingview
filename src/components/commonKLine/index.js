@@ -58,49 +58,49 @@ export default class index extends React.Component {
 
   componentDidMount() {
     console.log(1111111);
-    const mockData = {
-      type: '1',
-      klineId: '9',
-      resolution: '15',
-      theme: 'Dark',
-      lang: 'zh',
-      pre: 2,
-    }
-    this.setState({
-      webData: mockData,
-      theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
-    }, () => {
-      const { resolution, lang, pre } = this.state.webData
-      this.tradePricePrecision = pre || 4
-      this.resolution = resolution;
-      this.props.dispatch(this.props.setLang(lang))
-      if (!this.tvWidget) this.initTradingview(this.props)
-    });
+    // const mockData = {
+    //   type: '1',
+    //   klineId: '9',
+    //   resolution: '15',
+    //   theme: 'Dark',
+    //   lang: 'zh',
+    //   pre: 2,
+    // }
+    // this.setState({
+    //   webData: mockData,
+    //   theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
+    // }, () => {
+    //   const { resolution, lang, pre } = this.state.webData
+    //   this.tradePricePrecision = pre || 4
+    //   this.resolution = resolution;
+    //   this.props.dispatch(this.props.setLang(lang))
+    //   if (!this.tvWidget) this.initTradingview(this.props)
+    // });
 
-    // const _that = this;
-    // setupWebViewJavascriptBridge(function(bridge) {
-    //   if (isAndroid) {
-    //     bridge.init();
-    //   }
-    //   bridge.registerHandler('tvInit', (data, responseCallback) => {
-    //     console.log(11111, data);
-    //     let finallyData = data
-    //     if (Object.prototype.toString.call(data) === "[object String]") {
-    //       finallyData = JSON.parse(data);
-    //     }
-    //     console.log('data ====>', finallyData);
-    //     _that.setState({
-    //       webData: finallyData,
-    //       theme: finallyData.theme === 'Dark' ? ThemeDark: ThemeWhite
-    //     }, () => {
-    //       const { resolution, lang, pre } = _that.state.webData
-    //       _that.tradePricePrecision = pre || 4
-    //       _that.resolution = resolution;
-    //       _that.props.dispatch(_that.props.setLang(lang))
-    //       if (!_that.tvWidget) _that.initTradingview(_that.props)
-    //     });
-    //   });
-    // })
+    const _that = this;
+    setupWebViewJavascriptBridge(function(bridge) {
+      if (isAndroid) {
+        bridge.init();
+      }
+      bridge.registerHandler('tvInit', (data, responseCallback) => {
+        console.log(11111, data);
+        let finallyData = data
+        if (Object.prototype.toString.call(data) === "[object String]") {
+          finallyData = JSON.parse(data);
+        }
+        console.log('data ====>', finallyData);
+        _that.setState({
+          webData: finallyData,
+          theme: finallyData.theme === 'Dark' ? ThemeDark: ThemeWhite
+        }, () => {
+          const { resolution, lang, pre } = _that.state.webData
+          _that.tradePricePrecision = pre || 4
+          _that.resolution = resolution;
+          _that.props.dispatch(_that.props.setLang(lang))
+          if (!_that.tvWidget) _that.initTradingview(_that.props)
+        });
+      });
+    })
   }
 
 
