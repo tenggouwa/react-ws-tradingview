@@ -80,6 +80,7 @@ export default class index extends React.Component {
     const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
       if (isAndroid) {
+        console.log('init');
         bridge.init(function(message, responseCallback) { });
       }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
