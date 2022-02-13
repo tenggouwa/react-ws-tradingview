@@ -11,7 +11,7 @@ import './index.scss'
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
 // const isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
-const First = true
+let First = true
 
 new VConsole();
 function setupWebViewJavascriptBridge(callback) {
