@@ -98,7 +98,7 @@ export default class index extends React.Component {
         }, () => {
           const { resolution, lang, pre } = _that.state.webData
           _that.tradePricePrecision = pre || 4
-          _that.resolution = resolution;
+          _that.resolution = resolution || 15;
           _that.props.dispatch(_that.props.setLang(lang))
           if (!_that.tvWidget) _that.initTradingview(_that.props)
         });
