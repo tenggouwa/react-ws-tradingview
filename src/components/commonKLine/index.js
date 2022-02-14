@@ -92,11 +92,7 @@ export default class index extends React.Component {
         }
         console.log('data ====>', tvData);
         _that.setState({
-          webData: {
-            ...tvData,
-            lang: 'zh',
-            type: '1',
-          },
+          webData: tvData,
           theme: tvData.theme === 'Dark' ? ThemeDark: ThemeWhite
         }, () => {
           const { resolution, lang, pre } = _that.state.webData
