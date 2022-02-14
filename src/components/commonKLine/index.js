@@ -86,12 +86,11 @@ export default class index extends React.Component {
         bridge.init(function(message, responseCallback) { });
       }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
-        console.log('data ====>', data);
         let tvData = data
         if (Object.prototype.toString.call(data) === '[object String]') {
           tvData = JSON.parse(data)
         }
-        console.log(tvData);
+        console.log('data ====>', tvData);
         _that.setState({
           webData: tvData,
           theme: tvData.theme === 'Dark' ? ThemeDark: ThemeWhite
@@ -283,6 +282,7 @@ export default class index extends React.Component {
     const calbackReady = Object.prototype.hasOwnProperty.call(this.cacheData, 'onRealtimeCallback')
     // 处理历史数据
     if (firstHisFlagReady && historyReady) {
+      console.log('历史===>', klineFormatData);
       if (klineFormatData.length && klineFormatData.length !== 1) {
         this.lastHistoryKlineTime = klineFormatData[0].time
         this.cacheData.onHistoryCallback(klineFormatData, { noData: false })
