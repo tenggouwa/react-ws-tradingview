@@ -86,18 +86,15 @@ export default class index extends React.Component {
         bridge.init(function(message, responseCallback) { });
       }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
-        console.log('data ====>', data, {
-          ...data,
-          lang: 'zh',
-          type: '1',
-        });
+        console.log('data ====>', data);
+        let tvData = data
+        if (Object.prototype.toString.call(data) === '[object String]') {
+          tvData = JSON.parse(data)
+        }
+        console.log(tvData);
         _that.setState({
-          webData: {
-            ...data,
-            lang: 'zh',
-            type: '1',
-          },
-          theme: data.theme === 'Dark' ? ThemeDark: ThemeWhite
+          webData: tvData,
+          theme: tvData.theme === 'Dark' ? ThemeDark: ThemeWhite
         }, () => {
           const { resolution, lang, pre } = _that.state.webData
           _that.tradePricePrecision = pre || 4
