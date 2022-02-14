@@ -59,7 +59,6 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
-    console.log(1111111);
     // const mockData = {
     //   type: '1',
     //   klineId: '9',
@@ -82,15 +81,11 @@ export default class index extends React.Component {
     const _that = this;
     setupWebViewJavascriptBridge(function(bridge) {
       if (isAndroid && First) {
-        console.log('init');
+        console.log('firstInit');
         First = false
         bridge.init(function(message, responseCallback) { });
       }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
-        // let finallyData = data
-        // if (Object.prototype.toString.call(data) === "[object String]") {
-        //   finallyData = JSON.parse(data);
-        // }
         console.log('data ====>', data);
         _that.setState({
           webData: data,
@@ -143,7 +138,7 @@ export default class index extends React.Component {
     const { theme, webData } = this.state;
     const { lang } = props || this.props
     console.log('init', this.resolution, webData, lang);
-    let tvLang = lang
+    let tvLang = lang || 'zh'
     switch (lang) {
       case 'tw':
         tvLang = 'zh_TW'
