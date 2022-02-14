@@ -86,7 +86,11 @@ export default class index extends React.Component {
         bridge.init(function(message, responseCallback) { });
       }
       bridge.registerHandler('tvInit', (data, responseCallback) => {
-        console.log('data ====>', data);
+        console.log('data ====>', data, {
+          ...data,
+          lang: 'zh',
+          type: '1',
+        });
         _that.setState({
           webData: {
             ...data,
