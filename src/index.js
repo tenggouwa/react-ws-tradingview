@@ -10,9 +10,9 @@ import Router from './router';
 // import CommonHeader from '@/components/commonHeader';
 // import CommonHeader from '@/components/commonHeader/header';
 import CommonHook from '@/components/commonHook';
-import Websocket from '@/components/websocket'
-import './assets/iconfont/iconfont.scss'
-import './assets/iconfont/iconfont.js'
+import Websocket from '@/components/websocket';
+import './assets/iconfont/iconfont.scss';
+import './assets/iconfont/iconfont.js';
 
 import './styles/index.scss';
 

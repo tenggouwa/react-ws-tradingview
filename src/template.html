@@ -12,6 +12,30 @@
 </script>
 <body>
     <div id="app"></div>
+    <script>
+      function getUrlParams (param) {
+        const currentUrl = window.location.href; //获取当前链接
+        let arr = currentUrl.split("?");//分割域名和参数界限
+        if (arr.length > 1) {
+          arr = arr[1].split("&");//分割参数
+          for (let i = 0; i < arr.length; i++) {
+            const tem = arr[i].split("="); //分割参数名和参数内容
+            if (tem[0] == param) {
+              return tem[1];
+            }
+          }
+          return null;
+        } else {
+          return null;
+        }
+        return theRequest
+      }
+      const themeColor = getUrlParams('theme')
+      if (themeColor === 'black') {
+        const bodyDom = document.getElementsByTagName('body')[0];
+        bodyDom.style.backgroundColor = '#0C1115';
+      }
+    </script>
 </body>
 
 </html>

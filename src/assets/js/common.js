@@ -124,3 +124,21 @@ export const useThrottle = (fn, delay, dep = []) => {
     }
   }, dep)
 }
+
+export const getUrlParams = (param) => {
+  const currentUrl = window.location.href; //获取当前链接
+  let arr = currentUrl.split("?");//分割域名和参数界限
+  if (arr.length > 1) {
+    arr = arr[1].split("&");//分割参数
+    for (let i = 0; i < arr.length; i++) {
+      const tem = arr[i].split("="); //分割参数名和参数内容
+      if (tem[0] == param) {
+        return tem[1];
+      }
+    }
+    return null;
+  } else {
+    return null;
+  }
+  return theRequest
+}
