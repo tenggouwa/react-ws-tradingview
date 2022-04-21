@@ -159,7 +159,7 @@ export default class index extends React.Component {
       datafeed: Object.assign({}, Datafeeds, extraConfig(this)),
       interval: this.resolution,
       container_id: 'tv_chart_container',
-      library_path: 'static/TradingView/charting_library/',
+      library_path: 'tradingview/static/TradingView/charting_library/',
       timezone: 'Asia/Shanghai',
       locale: tvLang,
       fullscreen: false,
