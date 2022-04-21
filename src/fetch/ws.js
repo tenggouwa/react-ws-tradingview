@@ -5,7 +5,7 @@ function createWebSocket(url) {
 
   return () => {
       const BrowserWebSocket = window.WebSocket || window.MozWebSocket
-      const ws = new BrowserWebSocket(`${wsProtocol}://${location.host}/api/${url}`)
+      const ws = new BrowserWebSocket(`${wsProtocol}://${location.host}/mapi/${url}`)
       return ws
   }
 }
