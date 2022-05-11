@@ -10,7 +10,7 @@
 
 ## 用途
 
-> TradingView项目 可用于 WEB & WEBVIEW
+> TradingView项目 可用于 WEB & H5 & WEBVIEW
 
 
 ## 项目结构 ##
