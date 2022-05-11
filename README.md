@@ -44,6 +44,9 @@ npm run dev || yarn dev
 # 本地打包压缩
 npm run build || yarn build
 
+# 服务端链接
+修改 `/build/webpack.dev.config.js` 内的 `target` 改为 自己服务端地址
+
 ```
 
 ## 开发细则

@@ -3,9 +3,9 @@ const merge = require('webpack-merge')
 const commonConfig = require('./webpack.base.config.js')
 const webpack = require("webpack");
 
-const target = '118.31.229.15:18081';
-// const target = 'ultradx.com';
-// const target = 'preweb.wanfeng-dev.vip';
+// 服务端IP地址
+const target = 'IP';
+
 
 module.exports = merge(commonConfig, {
     mode: "development",
@@ -29,8 +29,9 @@ module.exports = merge(commonConfig, {
     ],
     devServer: {
         hot: true,
+        open: true,
         contentBase: path.resolve(__dirname, "../dist"),
-        host: "localhost", // 可以使用手机访问
+        host: "localhost", // 可以使用手机访问 0.0.0.0
         port: 8000,
         historyApiFallback: true, //  该选项的作用所有的404都连接到index.html
         proxy: {
@@ -38,7 +39,6 @@ module.exports = merge(commonConfig, {
                 target: `http://${target}`,
                 changeOrigin: true,
                 ws: true,
-                // pathRewrite: {'^/api': ''}
             },
             '/websocket/': {
                 target: `ws://${target}`,

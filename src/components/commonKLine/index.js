@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
@@ -8,33 +7,7 @@ import { widget } from '../../../static/TradingView/charting_library';
 import VConsole from 'vconsole';
 import './index.scss'
 
-const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
-// const isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-
-let First = true
-
 new VConsole();
-function setupWebViewJavascriptBridge(callback) {
-  // 安卓
-  if (isAndroid) {
-    if (window.WebViewJavascriptBridge) {
-      callback(window.WebViewJavascriptBridge)
-    } else {
-      document.addEventListener('WebViewJavascriptBridgeReady', function() {
-        callback(window.WebViewJavascriptBridge)
-      }, false);
-    }
-  }
-  // IOS
-	if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
-	if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
-	window.WVJBCallbacks = [callback];
-	var WVJBIframe = document.createElement('iframe');
-	WVJBIframe.style.display = 'none';
-	WVJBIframe.src = 'https://__bridge_loaded__';
-	document.documentElement.appendChild(WVJBIframe);
-	setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
-}
 @withRouter
 @connect(state => ({
     lang: state.lang,
@@ -59,50 +32,24 @@ export default class index extends React.Component {
 	tvWidget = null;
 
   componentDidMount() {
-    // const mockData = {
-    //   type: '1',
-    //   klineId: '9',
-    //   resolution: '15',
-    //   theme: 'Dark',
-    //   lang: 'zh',
-    //   pre: 2,
-    // }
-    // this.setState({
-    //   webData: mockData,
-    //   theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
-    // }, () => {
-    //   const { resolution, lang, pre } = this.state.webData
-    //   this.tradePricePrecision = pre || 4
-    //   this.resolution = resolution;
-    //   this.props.dispatch(this.props.setLang(lang))
-    //   if (!this.tvWidget) this.initTradingview(this.props)
-    // });
-
-    const _that = this;
-    setupWebViewJavascriptBridge(function(bridge) {
-      if (isAndroid && First) {
-        console.log('firstInit');
-        First = false
-        bridge.init(function(message, responseCallback) { });
-      }
-      bridge.registerHandler('tvInit', (data, responseCallback) => {
-        let tvData = data
-        if (Object.prototype.toString.call(data) === '[object String]') {
-          tvData = JSON.parse(data)
-        }
-        console.log('data ====>', tvData);
-        _that.setState({
-          webData: tvData,
-          theme: tvData.theme === 'Dark' ? ThemeDark: ThemeWhite
-        }, () => {
-          const { resolution, lang, pre } = _that.state.webData
-          _that.tradePricePrecision = pre || 4
-          _that.resolution = resolution || 15;
-          _that.props.dispatch(_that.props.setLang(lang))
-          if (!_that.tvWidget) _that.initTradingview(_that.props)
-        });
-      });
-    })
+    const mockData = {
+      type: '1',
+      klineId: '9',
+      resolution: '15',
+      theme: 'Dark',
+      lang: 'zh',
+      pre: 2,
+    }
+    this.setState({
+      webData: mockData,
+      theme: mockData.theme === 'Dark' ? ThemeDark: ThemeWhite
+    }, () => {
+      const { resolution, lang, pre } = this.state.webData
+      this.tradePricePrecision = pre || 4
+      this.resolution = resolution;
+      this.props.dispatch(this.props.setLang(lang))
+      if (!this.tvWidget) this.initTradingview(this.props)
+    });
   }
 
 
